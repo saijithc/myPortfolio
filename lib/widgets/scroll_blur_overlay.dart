@@ -13,7 +13,7 @@ class ScrollBlurOverlay extends StatefulWidget {
     required this.child,
     required this.scrollController,
     this.blurHeight = 100,
-    this.fadeDuration = const Duration(milliseconds: 1000),
+    this.fadeDuration = const Duration(milliseconds: 800),
   });
 
   @override
@@ -42,7 +42,7 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
       end: 1.0,
     ).animate(CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeOutCubic,
+      curve: Curves.easeInOutSine,
     ));
 
     // Initialize scroll position only if controller is attached
@@ -61,9 +61,8 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
   }
 
   void _onScroll() {
-    print('Scroll detected!');
     if (!mounted || !widget.scrollController.hasClients) {
-      print('Not mounted or no clients');
+     
       return;
     }
 
@@ -74,22 +73,19 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
     final isAtTop = currentPosition <= 0;
     final isAtBottom = currentPosition >= widget.scrollController.position.maxScrollExtent;
     
-    print('Position: $currentPosition, Delta: $scrollDelta, Down: $isScrollingDown, Up: $isScrollingUp');
-    
+   
     // Update direction immediately when scrolling
     if (isScrollingDown) {
       if (_isScrollingDown != true) {
         setState(() {
           _isScrollingDown = true;
         });
-        print('Set to DOWN');
       }
     } else if (isScrollingUp) {
       if (_isScrollingDown != false) {
         setState(() {
           _isScrollingDown = false;
         });
-        print('Set to UP');
       }
     }
     
@@ -101,7 +97,6 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
         setState(() {
           _isScrolling = true;
         });
-        print('Starting blur animation');
         _controller.forward();
       }
     } else {
@@ -117,7 +112,7 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
 
     // Reset timer for scroll end detection
     _scrollTimer?.cancel();
-    _scrollTimer = Timer(const Duration(milliseconds: 1000), () {
+    _scrollTimer = Timer(const Duration(milliseconds: 500), () {
       if (mounted && _isScrolling) {
         _isScrolling = false;
         _controller.reverse();
