@@ -230,9 +230,12 @@ class HeaderSection extends StatelessWidget {
         break;
       case 'about me':
         targetOffset = screenHeight * 0.8; // Header section height
+             case 'achievements':
+        targetOffset = screenHeight * 1.5;
+        
         break;
       case 'skills':
-        targetOffset = screenHeight * 2.0; // Header + About sections
+        targetOffset = screenHeight * 2.2; // Header + About sections
         break;
       case 'services':
         targetOffset = screenHeight * 3.5; // Header + About + Skills sections
