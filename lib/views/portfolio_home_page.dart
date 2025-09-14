@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../view_models/portfolio_view_model.dart';
 import '../widgets/scroll_triggered_loading_widget.dart';
+import '../widgets/scroll_blur_overlay.dart';
 import 'sections/header_section.dart';
 import 'sections/about_section.dart';
 import 'sections/skills_section.dart';
@@ -20,21 +21,23 @@ class PortfolioHomePage extends StatelessWidget {
       builder: (context, viewModel, child) {
         return Scaffold(
           key: viewModel.scaffoldKey,
-          body: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFF0A0A0A),
-                  Color(0xFF1A1A1A),
-                ],
+          body: ScrollBlurOverlay(
+            scrollController: viewModel.scrollController,
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF0A0A0A),
+                    Color(0xFF1A1A1A),
+                  ],
+                ),
               ),
-            ),
-            child: SingleChildScrollView(
-              controller: viewModel.scrollController,
-              child: Column(
-                children: [
+              child: SingleChildScrollView(
+                controller: viewModel.scrollController,
+                child: Column(
+                  children: [
                   // Header Section
                   ScrollTriggeredLoadingWidget(
                     child: HeaderSection(scrollController: viewModel.scrollController),
@@ -84,7 +87,8 @@ class PortfolioHomePage extends StatelessWidget {
                   ScrollTriggeredLoadingWidget(
                     child: const FooterSection(),
                   ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
