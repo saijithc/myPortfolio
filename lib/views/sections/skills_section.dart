@@ -11,15 +11,21 @@ class SkillsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
+    final isTablet = ResponsiveBreakpoints.of(context).isTablet;
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
 
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 20 : 40,
-        vertical: 80,
+        horizontal: isMobile ? 20 : isTablet ? 60 : 80,
+        vertical: isMobile ? 60 : 100,
       ),
-      child: Column(
-        children: [
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: isDesktop ? 1200 : double.infinity,
+        ),
+        child: Column(
+          children: [
           // Section Title
           Text(
             'Skills & Expertise',
@@ -49,7 +55,8 @@ class SkillsSection extends StatelessWidget {
               return _buildSkillsGrid(context, viewModel);
             },
           ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -57,86 +64,85 @@ class SkillsSection extends StatelessWidget {
   Widget _buildSkillsGrid(BuildContext context, PortfolioViewModel viewModel) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
     final isTablet = ResponsiveBreakpoints.of(context).isTablet;
-    
-    final categories = viewModel.skillCategories;
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+
+    // Get all skills from all categories
+    final allSkills = viewModel.skills;
+
+    if (allSkills.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Text(
+            "No skills to display.",
+            style: AppTheme.bodyLarge.copyWith(
+              color: AppTheme.textSecondary,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      );
+    }
 
     if (isMobile) {
       // Mobile Layout - Single Column
       return Column(
-        children: categories.map<Widget>((category) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Text(
-                  category,
-                  style: AppTheme.headingSmall.copyWith(
-                    color: AppTheme.neonGreen,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              
-              ...viewModel.getSkillsByCategory(category).map<Widget>((skill) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: _buildSkillCard(skill),
-                );
-              }),
-              
-              const SizedBox(height: 32),
-            ],
+        children: allSkills.map<Widget>((skill) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: _buildSkillCard(skill),
           );
         }).toList(),
       );
     } else {
-      // Desktop/Tablet Layout - Grid
-      return Column(
-        children: categories.map<Widget>((category) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 24),
-                child: Text(
-                  category,
-                  style: AppTheme.headingSmall.copyWith(
-                    color: AppTheme.neonGreen,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: isTablet ? 3 : 4,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: 1.0,
-                ),
-                itemCount: viewModel.getSkillsByCategory(category).length,
-                itemBuilder: (context, index) {
-                  final skill = viewModel.getSkillsByCategory(category)[index];
-                  return _buildSkillCard(skill);
-                },
-              ),
-              
-              const SizedBox(height: 40),
-            ],
+      // Desktop/Tablet/Web Layout - Grid
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          // Calculate optimal columns based on available width
+          double availableWidth = constraints.maxWidth;
+          int crossAxisCount;
+
+          if (isTablet) {
+            crossAxisCount = availableWidth > 600 ? 3 : 2;
+          } else if (isDesktop) {
+            if (availableWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (availableWidth > 1000) {
+              crossAxisCount = 4;
+            } else if (availableWidth > 800) {
+              crossAxisCount = 3;
+            } else {
+              crossAxisCount = 2;
+            }
+          } else {
+            crossAxisCount = 2;
+          }
+
+          return GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              crossAxisSpacing: isDesktop ? 32 : 24,
+              mainAxisSpacing: isDesktop ? 32 : 24,
+              childAspectRatio: 1.0,
+            ),
+            itemCount: allSkills.length,
+            itemBuilder: (context, index) {
+              final skill = allSkills[index];
+              return _buildSkillCard(skill);
+            },
           );
-        }).toList(),
+        },
       );
     }
   }
-
   Widget _buildSkillCard(skill) {
     return GlowCard(
       padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Skill Icon
           Text(
@@ -154,6 +160,8 @@ class SkillsSection extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
           
           const SizedBox(height: 12),
