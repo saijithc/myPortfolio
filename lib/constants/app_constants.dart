@@ -23,15 +23,12 @@ class AppConstants {
   );
 
   static const List<String> navigationItems = [
-    'Home','About Me',
+    'Home',
+    'About Me',
     'Achievements',
-  'Skills',
-
+    'Skills',
     'Services',
-  
-    // 'Pricing',
-    
-    // 'Contact',
+    'Experience'
   ];
 
   static const List<Skill> skills = [
