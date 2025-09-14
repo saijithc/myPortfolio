@@ -61,6 +61,7 @@ class ServicesSection extends StatelessWidget {
     if (isMobile) {
       // Mobile Layout - Single Column
       return Column(
+        mainAxisSize: MainAxisSize.min,
         children: services.map<Widget>((service) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 24),
@@ -92,6 +93,7 @@ class ServicesSection extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Service Icon
           Container(
@@ -165,7 +167,7 @@ class ServicesSection extends StatelessWidget {
             );
           }),
           
-          const Spacer(),
+          const SizedBox(height: 20),
           
           // Learn More Button
           Container(

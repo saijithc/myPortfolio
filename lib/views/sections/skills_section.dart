@@ -87,6 +87,7 @@ class SkillsSection extends StatelessWidget {
     if (isMobile) {
       // Mobile Layout - Single Column
       return Column(
+        mainAxisSize: MainAxisSize.min,
         children: allSkills.map<Widget>((skill) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 12),
@@ -118,20 +119,25 @@ class SkillsSection extends StatelessWidget {
             crossAxisCount = 2;
           }
 
-          return GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-              crossAxisSpacing: isDesktop ? 32 : 24,
-              mainAxisSpacing: isDesktop ? 32 : 24,
-              childAspectRatio: 1.0,
+          return Container(
+            constraints: BoxConstraints(
+              minHeight: 200,
             ),
-            itemCount: allSkills.length,
-            itemBuilder: (context, index) {
-              final skill = allSkills[index];
-              return _buildSkillCard(skill);
-            },
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: isMobile ? 16 : isDesktop ? 32 : 24,
+                mainAxisSpacing: isMobile ? 16 : isDesktop ? 32 : 24,
+                childAspectRatio: 1.0,
+              ),
+              itemCount: allSkills.length,
+              itemBuilder: (context, index) {
+                final skill = allSkills[index];
+                return _buildSkillCard(skill);
+              },
+            ),
           );
         },
       );
