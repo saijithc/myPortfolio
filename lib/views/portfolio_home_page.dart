@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../view_models/portfolio_view_model.dart';
-import '../widgets/fade_in_widget.dart';
+import '../widgets/scroll_triggered_loading_widget.dart';
 import 'sections/header_section.dart';
 import 'sections/about_section.dart';
 import 'sections/skills_section.dart';
@@ -9,8 +9,6 @@ import 'sections/services_section.dart';
 import 'sections/experience_section.dart';
 import 'sections/projects_section.dart';
 import 'sections/why_hire_section.dart';
-import 'sections/pricing_section.dart';
-import 'sections/contact_section.dart';
 import 'sections/footer_section.dart';
 
 class PortfolioHomePage extends StatelessWidget {
@@ -38,62 +36,52 @@ class PortfolioHomePage extends StatelessWidget {
               child: Column(
                 children: [
                   // Header Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 200),
+                  ScrollTriggeredLoadingWidget(
                     child: HeaderSection(scrollController: viewModel.scrollController),
                   ),
                   
                   // About Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 400),
+                  ScrollTriggeredLoadingWidget(
                     child: const AboutSection(),
                   ),
                   
                   // Skills Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 600),
+                  ScrollTriggeredLoadingWidget(
                     child: const SkillsSection(),
                   ),
                   
                   // Services Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 800),
+                  ScrollTriggeredLoadingWidget(
                     child: const ServicesSection(),
                   ),
                   
                   // Experience Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 1000),
+                  ScrollTriggeredLoadingWidget(
                     child: const ExperienceSection(),
                   ),
                   
                   // Projects Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 1200),
+                  ScrollTriggeredLoadingWidget(
                     child: const ProjectsSection(),
                   ),
                   
                   // Why Hire Me Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 1400),
+                  ScrollTriggeredLoadingWidget(
                     child: const WhyHireSection(),
                   ),
                   
                   // Pricing Section
-                  // FadeInWidget(
-                  //   delay: const Duration(milliseconds: 1600),
+                  // ScrollTriggeredLoadingWidget(
                   //   child: const PricingSection(),
                   // ),
                   
                   // Contact Section
-                  // FadeInWidget(
-                  //   delay: const Duration(milliseconds: 1800),
+                  // ScrollTriggeredLoadingWidget(
                   //   child: const ContactSection(),
                   // ),
                   
                   // Footer Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 2000),
+                  ScrollTriggeredLoadingWidget(
                     child: const FooterSection(),
                   ),
                 ],
