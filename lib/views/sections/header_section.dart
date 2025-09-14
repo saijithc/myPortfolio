@@ -18,6 +18,7 @@ class HeaderSection extends StatelessWidget {
         minHeight: MediaQuery.of(context).size.height,
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Navigation Bar
           Container(
@@ -70,7 +71,7 @@ class HeaderSection extends StatelessWidget {
           ),
           
           // Hero Content
-          Expanded(
+          Flexible(
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: isMobile ? 20 : 40,
@@ -87,7 +88,7 @@ class HeaderSection extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: AppTheme.neonGreen,
-                        width: 3,
+                        width: .6,
                       ),
                       boxShadow: [
                         BoxShadow(
@@ -97,12 +98,19 @@ class HeaderSection extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const CircleAvatar(
-                      backgroundColor: AppTheme.secondaryDark,
-                      child: Icon(
-                        Icons.person,
-                        size: 80,
-                        color: AppTheme.neonGreen,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/profile_image.png',
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Icon(
+                            Icons.person,
+                            size: 80,
+                            color: AppTheme.neonGreen,
+                          );
+                        },
                       ),
                     ),
                   ),

@@ -130,7 +130,7 @@ class AppConstants {
       description: 'Dark theme salon booking app with comprehensive features',
       longDescription: 'A modern salon booking application featuring dark theme design, advanced booking system, stylist selection, and integrated payment processing. The app was fully designed in Figma before development.',
       technologies: ['Flutter', 'Dart', 'Firebase', 'Payment Gateway', 'MVVM'],
-      imageUrl: 'assets/images/groomly.png',
+      imageUrl: 'assets/images/projects/groomly.png',
       githubUrl: 'https://github.com/saijithc/groomly',
       liveUrl: null,
       features: [
@@ -147,7 +147,7 @@ class AppConstants {
       description: 'Feature-rich offline music player with modern UI',
       longDescription: 'A comprehensive offline music player built with Flutter featuring MVVM architecture, local storage with Hive, and GetX state management. Includes playlists, favorites, and a mini-player.',
       technologies: ['Flutter', 'Dart', 'Hive', 'GetX', 'MVVM'],
-      imageUrl: 'assets/images/music_pill.png',
+      imageUrl: 'assets/images/projects/music_pill.png',
       githubUrl: 'https://github.com/saijithc/music-pill',
       liveUrl: null,
       features: [
@@ -164,7 +164,7 @@ class AppConstants {
       description: 'Full-featured social media platform with real-time communication',
       longDescription: 'A comprehensive social media application featuring multiple authentication methods, real-time chat, voice/video calls, posts, stories, and push notifications.',
       technologies: ['Flutter', 'Dart', 'Firebase', 'WebRTC', 'Provider'],
-      imageUrl: 'assets/images/tailus.png',
+      imageUrl: 'assets/images/projects/tailus.png',
       githubUrl: 'https://github.com/saijithc/tailus',
       liveUrl: null,
       features: [
