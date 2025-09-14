@@ -76,7 +76,7 @@ class FooterSection extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      ...AppConstants.navigationItems.map((item) {
+                      ...AppConstants.navigationItems.map<Widget>((item) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 8),
                           child: InkWell(
@@ -113,13 +113,13 @@ class FooterSection extends StatelessWidget {
                       _buildContactFooterItem(
                         Icons.email,
                         AppConstants.contactInfo.email,
-                        () => _launchEmail(AppConstants.contactInfo.email),
+                        onTap: () => _launchEmail(AppConstants.contactInfo.email),
                       ),
                       const SizedBox(height: 8),
                       _buildContactFooterItem(
                         Icons.phone,
                         AppConstants.contactInfo.phone,
-                        () => _launchPhone(AppConstants.contactInfo.phone),
+                        onTap: () => _launchPhone(AppConstants.contactInfo.phone),
                       ),
                       const SizedBox(height: 8),
                       _buildContactFooterItem(
@@ -199,7 +199,7 @@ class FooterSection extends StatelessWidget {
                     Wrap(
                       spacing: 16,
                       runSpacing: 8,
-                      children: AppConstants.navigationItems.map((item) {
+                      children: AppConstants.navigationItems.map<Widget>((item) {
                         return InkWell(
                           onTap: () => _scrollToSection(context, item),
                           child: Text(
@@ -231,13 +231,13 @@ class FooterSection extends StatelessWidget {
                     _buildContactFooterItem(
                       Icons.email,
                       AppConstants.contactInfo.email,
-                      () => _launchEmail(AppConstants.contactInfo.email),
+                      onTap: () => _launchEmail(AppConstants.contactInfo.email),
                     ),
                     const SizedBox(height: 8),
                     _buildContactFooterItem(
                       Icons.phone,
                       AppConstants.contactInfo.phone,
-                      () => _launchPhone(AppConstants.contactInfo.phone),
+                      onTap: () => _launchPhone(AppConstants.contactInfo.phone),
                     ),
                     const SizedBox(height: 8),
                     _buildContactFooterItem(

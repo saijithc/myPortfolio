@@ -58,7 +58,7 @@ class ExperienceSection extends StatelessWidget {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
 
     return Column(
-      children: experiences.asMap().entries.map((entry) {
+      children: experiences.asMap().entries.map<Widget>((entry) {
         final index = entry.key;
         final experience = entry.value;
         final isLast = index == experiences.length - 1;

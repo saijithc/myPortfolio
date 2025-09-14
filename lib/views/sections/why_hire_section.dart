@@ -51,6 +51,7 @@ class WhyHireSection extends StatelessWidget {
 
   Widget _buildWhyHireCards(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
+    final isTablet = ResponsiveBreakpoints.of(context).isTablet;
 
     final reasons = [
       {

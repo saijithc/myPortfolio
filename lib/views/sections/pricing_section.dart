@@ -56,6 +56,7 @@ class PricingSection extends StatelessWidget {
 
   Widget _buildPricingCards(BuildContext context, pricingPlans) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
+    final isTablet = ResponsiveBreakpoints.of(context).isTablet;
 
     if (isMobile) {
       // Mobile Layout - Single Column

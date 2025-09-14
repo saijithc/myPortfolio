@@ -56,13 +56,14 @@ class SkillsSection extends StatelessWidget {
 
   Widget _buildSkillsGrid(BuildContext context, PortfolioViewModel viewModel) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
+    final isTablet = ResponsiveBreakpoints.of(context).isTablet;
     
     final categories = viewModel.skillCategories;
 
     if (isMobile) {
       // Mobile Layout - Single Column
       return Column(
-        children: categories.map((category) {
+        children: categories.map<Widget>((category) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -77,7 +78,7 @@ class SkillsSection extends StatelessWidget {
                 ),
               ),
               
-              ...viewModel.getSkillsByCategory(category).map((skill) {
+              ...viewModel.getSkillsByCategory(category).map<Widget>((skill) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: _buildSkillCard(skill),
@@ -92,7 +93,7 @@ class SkillsSection extends StatelessWidget {
     } else {
       // Desktop/Tablet Layout - Grid
       return Column(
-        children: categories.map((category) {
+        children: categories.map<Widget>((category) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

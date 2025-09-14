@@ -285,7 +285,7 @@ class AboutSection extends StatelessWidget {
         
         if (isMobile) ...[
           // Mobile Layout - Single Column
-          ...achievements.map((achievement) => Padding(
+          ...achievements.map<Widget>((achievement) => Padding(
             padding: const EdgeInsets.only(bottom: 24),
             child: _buildAchievementCard(achievement),
           )),

@@ -40,7 +40,7 @@ class HeaderSection extends StatelessWidget {
                 // Navigation Menu
                 if (!isMobile) ...[
                   Row(
-                    children: AppConstants.navigationItems.map((item) {
+                    children: AppConstants.navigationItems.map<Widget>((item) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: TextButton(
@@ -243,7 +243,7 @@ class HeaderSection extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: AppConstants.navigationItems.map((item) {
+          children: AppConstants.navigationItems.map<Widget>((item) {
             return ListTile(
               title: Text(
                 item,
