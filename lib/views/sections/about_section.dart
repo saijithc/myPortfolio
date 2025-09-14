@@ -121,8 +121,7 @@ class AboutSection extends StatelessWidget {
       ],
     );
   }
-
-  Widget _buildContactInfo(BuildContext context) {
+ Widget _buildContactInfo(BuildContext context) {
     final contactInfo = AppConstants.contactInfo;
     
     return GlowCard(
@@ -146,7 +145,7 @@ class AboutSection extends StatelessWidget {
             contactInfo.name,
           ),
           
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           
           _buildContactItem(
             Icons.email,
@@ -155,7 +154,7 @@ class AboutSection extends StatelessWidget {
             onTap: () => _launchEmail(contactInfo.email),
           ),
           
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           
           _buildContactItem(
             Icons.phone,
@@ -164,7 +163,7 @@ class AboutSection extends StatelessWidget {
             onTap: () => _launchPhone(contactInfo.phone),
           ),
           
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           
           _buildContactItem(
             Icons.location_on,
@@ -172,18 +171,30 @@ class AboutSection extends StatelessWidget {
             contactInfo.location,
           ),
           
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
           
           // Social Links
+          Text(
+            'Connect with me',
+            style: AppTheme.bodyLarge.copyWith(
+              color: AppTheme.textPrimary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          
+          const SizedBox(height: 16),
+          
           Row(
             children: [
-              _buildSocialIcon(
+              _buildSocialButton(
                 'GitHub',
+                Icons.code,
                 () => _launchUrl('https://${contactInfo.github}'),
               ),
               const SizedBox(width: 16),
-              _buildSocialIcon(
+              _buildSocialButton(
                 'LinkedIn',
+                Icons.work,
                 () => _launchUrl('https://${contactInfo.linkedin}'),
               ),
             ],
@@ -192,6 +203,108 @@ class AboutSection extends StatelessWidget {
       ),
     );
   }
+ Widget _buildSocialButton(String label, IconData icon, VoidCallback onTap) {
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(
+            border: Border.all(color: AppTheme.neonGreen.withOpacity(0.3)),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            children: [
+              Icon(
+                icon,
+                color: AppTheme.neonGreen,
+                size: 24,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                label,
+                style: AppTheme.bodyMedium.copyWith(
+                  color: AppTheme.neonGreen,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  // Widget _buildContactInfo(BuildContext context) {
+  //   final contactInfo = AppConstants.contactInfo;
+    
+  //   return GlowCard(
+  //     padding: const EdgeInsets.all(24),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           'Contact Information',
+  //           style: AppTheme.headingSmall.copyWith(
+  //             color: AppTheme.textPrimary,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+          
+  //         const SizedBox(height: 24),
+          
+  //         _buildContactItem(
+  //           Icons.person,
+  //           'Name',
+  //           contactInfo.name,
+  //         ),
+          
+  //         const SizedBox(height: 16),
+          
+  //         _buildContactItem(
+  //           Icons.email,
+  //           'Email',
+  //           contactInfo.email,
+  //           onTap: () => _launchEmail(contactInfo.email),
+  //         ),
+          
+  //         const SizedBox(height: 16),
+          
+  //         _buildContactItem(
+  //           Icons.phone,
+  //           'Phone',
+  //           contactInfo.phone,
+  //           onTap: () => _launchPhone(contactInfo.phone),
+  //         ),
+          
+  //         const SizedBox(height: 16),
+          
+  //         _buildContactItem(
+  //           Icons.location_on,
+  //           'Location',
+  //           contactInfo.location,
+  //         ),
+          
+  //         const SizedBox(height: 24),
+          
+  //         // Social Links
+  //         Row(
+  //           children: [
+  //             _buildSocialIcon(
+  //               'GitHub',
+  //               () => _launchUrl('https://${contactInfo.github}'),
+  //             ),
+  //             const SizedBox(width: 16),
+  //             _buildSocialIcon(
+  //               'LinkedIn',
+  //               () => _launchUrl('https://${contactInfo.linkedin}'),
+  //             ),
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildContactItem(
     IconData icon,

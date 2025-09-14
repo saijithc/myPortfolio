@@ -7,7 +7,7 @@ import '../models/achievement.dart';
 import '../models/contact_info.dart';
 
 class AppConstants {
-  static const String appName = 'Saijith C';
+  static const String appName = 'SAIJITH C';
   static const String tagline = 'Helping Businesses Achieve Higher Visibility';
   static const String subtitle = 'Frontend Developer (Flutter & Dart)';
   static const String aboutSummary = 
@@ -23,13 +23,15 @@ class AppConstants {
   );
 
   static const List<String> navigationItems = [
-    'Home',
-    'Case Studies',
+    'Home','About Me',
+    'Achievements',
+  'Skills',
+
     'Services',
-    'Blog',
-    'Pricing',
-    'About Me',
-    'Contact',
+  
+    // 'Pricing',
+    
+    // 'Contact',
   ];
 
   static const List<Skill> skills = [
@@ -38,21 +40,21 @@ class AppConstants {
     Skill(name: 'Dart', category: 'Language', proficiency: 90, icon: '💎'),
     
     // State Management
-    Skill(name: 'Provider', category: 'State Management', proficiency: 85, icon: '🔄'),
-    Skill(name: 'Riverpod', category: 'State Management', proficiency: 80, icon: '🌊'),
+    Skill(name: 'Provider', category: 'State Management', proficiency: 90, icon: '🔄'),
+    Skill(name: 'Riverpod', category: 'State Management', proficiency: 85, icon: '🌊'),
     Skill(name: 'GetX', category: 'State Management', proficiency: 85, icon: '⚡'),
     
     // Tools
     Skill(name: 'Firebase', category: 'Backend', proficiency: 90, icon: '🔥'),
-    Skill(name: 'Hive', category: 'Database', proficiency: 80, icon: '📦'),
+    Skill(name: 'Hive', category: 'Database', proficiency: 90, icon: '📦'),
     Skill(name: 'Figma', category: 'Design', proficiency: 75, icon: '🎨'),
-    Skill(name: 'Git', category: 'Version Control', proficiency: 85, icon: '📝'),
+    Skill(name: 'Git', category: 'Version Control', proficiency: 100, icon: '📝'),
     Skill(name: 'Postman', category: 'API Testing', proficiency: 80, icon: '📮'),
     
     // Architecture
     Skill(name: 'MVVM', category: 'Architecture', proficiency: 90, icon: '🏗️'),
     Skill(name: 'MVC', category: 'Architecture', proficiency: 85, icon: '🏛️'),
-    Skill(name: 'RESTful APIs', category: 'Integration', proficiency: 85, icon: '🔌'),
+    Skill(name: 'RESTful APIs', category: 'Integration', proficiency: 100, icon: '🔌'),
   ];
 
   static const List<Service> services = [
@@ -231,7 +233,7 @@ class AppConstants {
     Achievement(
       title: 'Projects Completed',
       description: 'Successfully delivered projects',
-      value: 600,
+      value: 30,
       suffix: '+',
       icon: '🚀',
     ),
@@ -245,7 +247,7 @@ class AppConstants {
     Achievement(
       title: 'Traffic Growth',
       description: 'Organic traffic improvement',
-      value: 200,
+      value: 100,
       suffix: '%',
       icon: '📈',
     ),

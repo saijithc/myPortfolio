@@ -40,7 +40,7 @@ class PortfolioHomePage extends StatelessWidget {
                   // Header Section
                   FadeInWidget(
                     delay: const Duration(milliseconds: 200),
-                    child: const HeaderSection(),
+                    child: HeaderSection(scrollController: viewModel.scrollController),
                   ),
                   
                   // About Section
@@ -80,16 +80,16 @@ class PortfolioHomePage extends StatelessWidget {
                   ),
                   
                   // Pricing Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 1600),
-                    child: const PricingSection(),
-                  ),
+                  // FadeInWidget(
+                  //   delay: const Duration(milliseconds: 1600),
+                  //   child: const PricingSection(),
+                  // ),
                   
                   // Contact Section
-                  FadeInWidget(
-                    delay: const Duration(milliseconds: 1800),
-                    child: const ContactSection(),
-                  ),
+                  // FadeInWidget(
+                  //   delay: const Duration(milliseconds: 1800),
+                  //   child: const ContactSection(),
+                  // ),
                   
                   // Footer Section
                   FadeInWidget(

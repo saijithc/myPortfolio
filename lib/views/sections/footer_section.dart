@@ -31,36 +31,36 @@ class FooterSection extends StatelessWidget {
         children: [
           if (!isMobile) ...[
             // Desktop Footer
-            Row(
+            Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Logo and Description
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppConstants.appName,
-                        style: AppTheme.headingSmall.copyWith(
-                          color: AppTheme.neonGreen,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        AppConstants.aboutSummary,
-                        style: AppTheme.bodyMedium.copyWith(
-                          color: AppTheme.textSecondary,
-                          height: 1.6,
-                        ),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
+                // Expanded(
+                //   flex: 2,
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       Text(
+                //         AppConstants.appName,
+                //         style: AppTheme.headingSmall.copyWith(
+                //           color: AppTheme.neonGreen,
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //       ),
+                //       const SizedBox(height: 16),
+                //       Text(
+                //         AppConstants.aboutSummary,
+                //         style: AppTheme.bodyMedium.copyWith(
+                //           color: AppTheme.textSecondary,
+                //           height: 1.6,
+                //         ),
+                //         maxLines: 5,
+                //         overflow: TextOverflow.ellipsis,
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 
-                const SizedBox(width: 60),
+                // const SizedBox(width: 60),
                 
                 // Quick Links
                 Expanded(
@@ -134,28 +134,28 @@ class FooterSection extends StatelessWidget {
             
             const SizedBox(height: 40),
             
-            // Social Links
-            Row(
-              children: [
-                Text(
-                  'Follow me:',
-                  style: AppTheme.bodyMedium.copyWith(
-                    color: AppTheme.textPrimary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                _buildSocialIcon(
-                  'GitHub',
-                  () => _launchUrl('https://${AppConstants.contactInfo.github}'),
-                ),
-                const SizedBox(width: 16),
-                _buildSocialIcon(
-                  'LinkedIn',
-                  () => _launchUrl('https://${AppConstants.contactInfo.linkedin}'),
-                ),
-              ],
-            ),
+            // // Social Links
+            // Row(
+            //   children: [
+            //     Text(
+            //       'Follow me:',
+            //       style: AppTheme.bodyMedium.copyWith(
+            //         color: AppTheme.textPrimary,
+            //         fontWeight: FontWeight.w600,
+            //       ),
+            //     ),
+            //     const SizedBox(width: 16),
+            //     _buildSocialIcon(
+            //       'GitHub',
+            //       () => _launchUrl('https://${AppConstants.contactInfo.github}'),
+            //     ),
+            //     const SizedBox(width: 16),
+            //     _buildSocialIcon(
+            //       'LinkedIn',
+            //       () => _launchUrl('https://${AppConstants.contactInfo.linkedin}'),
+            //     ),
+            //   ],
+            // ),
           ] else ...[
             // Mobile Footer
             Column(
@@ -250,27 +250,27 @@ class FooterSection extends StatelessWidget {
                 const SizedBox(height: 32),
                 
                 // Social Links
-                Row(
-                  children: [
-                    Text(
-                      'Follow me:',
-                      style: AppTheme.bodyMedium.copyWith(
-                        color: AppTheme.textPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    _buildSocialIcon(
-                      'GitHub',
-                      () => _launchUrl('https://${AppConstants.contactInfo.github}'),
-                    ),
-                    const SizedBox(width: 16),
-                    _buildSocialIcon(
-                      'LinkedIn',
-                      () => _launchUrl('https://${AppConstants.contactInfo.linkedin}'),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'Follow me:',
+                //       style: AppTheme.bodyMedium.copyWith(
+                //         color: AppTheme.textPrimary,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                //     ),
+                //     const SizedBox(width: 16),
+                //     _buildSocialIcon(
+                //       'GitHub',
+                //       () => _launchUrl('https://${AppConstants.contactInfo.github}'),
+                //     ),
+                //     const SizedBox(width: 16),
+                //     _buildSocialIcon(
+                //       'LinkedIn',
+                //       () => _launchUrl('https://${AppConstants.contactInfo.linkedin}'),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ],

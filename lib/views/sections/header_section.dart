@@ -6,17 +6,16 @@ import '../../constants/app_theme.dart';
 import '../../widgets/typing_animation.dart';
 
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({super.key});
+  final ScrollController scrollController;
+  
+  const HeaderSection({super.key, required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
 
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      constraints: BoxConstraints(
-        minHeight: MediaQuery.of(context).size.height,
-      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -176,15 +175,8 @@ class HeaderSection extends StatelessWidget {
                       ],
                     ),
                   ],
-                  
-                  const SizedBox(height: 60),
-                  
-                  // Scroll Indicator
-                  const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: AppTheme.neonGreen,
-                    size: 32,
-                  ),
+              
+                 
                 ],
               ),
             ),
@@ -228,9 +220,47 @@ class HeaderSection extends StatelessWidget {
   }
 
   void _scrollToSection(BuildContext context, String sectionName) {
-    // This will be implemented with scroll controllers
-    // For now, we'll just print the section name
-    debugPrint('Scrolling to: $sectionName');
+    // Calculate approximate scroll positions for each section
+    double targetOffset = 0;
+    final screenHeight = MediaQuery.of(context).size.height;
+    
+    switch (sectionName.toLowerCase()) {
+      case 'home':
+        targetOffset = 0;
+        break;
+      case 'about me':
+        targetOffset = screenHeight * 0.8; // Header section height
+        break;
+      case 'skills':
+        targetOffset = screenHeight * 2.0; // Header + About sections
+        break;
+      case 'services':
+        targetOffset = screenHeight * 3.5; // Header + About + Skills sections
+        break;
+      case 'experience':
+        targetOffset = screenHeight * 5.0; // Previous sections
+        break;
+      case 'projects':
+        targetOffset = screenHeight * 6.5; // Previous sections
+        break;
+      case 'case studies':
+        targetOffset = screenHeight * 6.5; // Same as projects
+        break;
+      case 'pricing':
+        targetOffset = screenHeight * 8.0; // Previous sections
+        break;
+      case 'contact':
+        targetOffset = screenHeight * 0.8; // Previous sections
+        break;
+      default:
+        targetOffset = 0;
+    }
+    
+    scrollController.animateTo(
+      targetOffset,
+      duration: const Duration(milliseconds: 1000),
+      curve: Curves.easeInOut,
+    );
   }
 
   void _openLinkedIn(BuildContext context) async {
