@@ -84,64 +84,53 @@ class SkillsSection extends StatelessWidget {
       );
     }
 
-    if (isMobile) {
-      // Mobile Layout - Single Column
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: allSkills.map<Widget>((skill) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: _buildSkillCard(skill),
-          );
-        }).toList(),
-      );
-    } else {
-      // Desktop/Tablet/Web Layout - Grid
-      return LayoutBuilder(
-        builder: (context, constraints) {
-          // Calculate optimal columns based on available width
-          double availableWidth = constraints.maxWidth;
-          int crossAxisCount;
+    // Grid Layout for all screen sizes
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Calculate optimal columns based on available width
+        double availableWidth = constraints.maxWidth;
+        int crossAxisCount;
 
-          if (isTablet) {
-            crossAxisCount = availableWidth > 600 ? 3 : 2;
-          } else if (isDesktop) {
-            if (availableWidth > 1200) {
-              crossAxisCount = 5;
-            } else if (availableWidth > 1000) {
-              crossAxisCount = 4;
-            } else if (availableWidth > 800) {
-              crossAxisCount = 3;
-            } else {
-              crossAxisCount = 2;
-            }
+        if (isMobile) {
+          crossAxisCount = 2; // Always 2 columns on mobile
+        } else if (isTablet) {
+          crossAxisCount = availableWidth > 600 ? 3 : 2;
+        } else if (isDesktop) {
+          if (availableWidth > 1200) {
+            crossAxisCount = 5;
+          } else if (availableWidth > 1000) {
+            crossAxisCount = 4;
+          } else if (availableWidth > 800) {
+            crossAxisCount = 3;
           } else {
             crossAxisCount = 2;
           }
+        } else {
+          crossAxisCount = 2;
+        }
 
-          return Container(
-            constraints: BoxConstraints(
-              minHeight: 200,
+        return Container(
+          constraints: BoxConstraints(
+            minHeight: 200,
+          ),
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              crossAxisSpacing: isMobile ? 16 : isDesktop ? 32 : 24,
+              mainAxisSpacing: isMobile ? 16 : isDesktop ? 32 : 24,
+              childAspectRatio: 1.0,
             ),
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                crossAxisSpacing: isMobile ? 16 : isDesktop ? 32 : 24,
-                mainAxisSpacing: isMobile ? 16 : isDesktop ? 32 : 24,
-                childAspectRatio: 1.0,
-              ),
-              itemCount: allSkills.length,
-              itemBuilder: (context, index) {
-                final skill = allSkills[index];
-                return _buildSkillCard(skill);
-              },
-            ),
-          );
-        },
-      );
-    }
+            itemCount: allSkills.length,
+            itemBuilder: (context, index) {
+              final skill = allSkills[index];
+              return _buildSkillCard(skill);
+            },
+          ),
+        );
+      },
+    );
   }
   Widget _buildSkillCard(skill) {
     return GlowCard(
