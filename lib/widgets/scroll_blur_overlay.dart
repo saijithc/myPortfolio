@@ -105,7 +105,6 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
         setState(() {
           _isScrolling = false;
         });
-        print('Stopping blur animation');
         _controller.reverse();
       }
     }
