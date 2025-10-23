@@ -116,50 +116,6 @@ class FooterSection extends StatelessWidget {
             // Mobile Footer
             Column(
               children: [
-                // Logo and Description
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    textBoldDefault(
-                      text: AppConstants.appName,
-                      color: AppTheme.neonGreen,
-                    ),
-                    const SizedBox(height: 16),
-                    textRegularDefault(
-                      text: AppConstants.aboutSummary,
-                      color: AppTheme.textSecondary,
-                    ),
-                  ],
-                ),
-                
-                const SizedBox(height: 32),
-                
-                // Quick Links
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    textBoldLarge(
-                      text: 'Quick Links',
-                      color: AppTheme.textPrimary,
-                    ),
-                    const SizedBox(height: 16),
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 8,
-                      children: AppConstants.navigationItems.map<Widget>((item) {
-                        return InkWell(
-                          onTap: () => _scrollToSection(context, item),
-                          child: textRegularDefault(
-                            text: item,
-                            color: AppTheme.textSecondary,
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-                
-                const SizedBox(height: 32),
                 
                 // Contact Info
                 Column(
@@ -202,29 +158,30 @@ class FooterSection extends StatelessWidget {
                 ),
                 
                 const SizedBox(height: 32),
-                
-                // Social Links
-                // Row(
-                //   children: [
-                //     Text(
-                //       'Follow me:',
-                //       style: AppTheme.bodyMedium.copyWith(
-                //         color: AppTheme.textPrimary,
-                //         fontWeight: FontWeight.w600,
-                //       ),
-                //     ),
-                //     const SizedBox(width: 16),
-                //     _buildSocialIcon(
-                //       'GitHub',
-                //       () => _launchUrl('https://${AppConstants.contactInfo.github}'),
-                //     ),
-                //     const SizedBox(width: 16),
-                //     _buildSocialIcon(
-                //       'LinkedIn',
-                //       () => _launchUrl('https://${AppConstants.contactInfo.linkedin}'),
-                //     ),
-                //   ],
-                // ),
+                 // Quick Links
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    textBoldLarge(
+                      text: 'Quick Links',
+                      color: AppTheme.textPrimary,
+                    ),
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 16,
+                      runSpacing: 8,
+                      children: AppConstants.navigationItems.map<Widget>((item) {
+                        return InkWell(
+                          onTap: () => _scrollToSection(context, item),
+                          child: textRegularDefault(
+                            text: item,
+                            color: AppTheme.textSecondary,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
               ],
             ),
           ],
