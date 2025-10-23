@@ -53,17 +53,17 @@ class AboutSection extends StatelessWidget {
               children: [
                 // Left Column - About Text
                 Expanded(
-                  flex: 2,
+                  // flex: 2,
                   child: _buildAboutText(context),
                 ),
                 
-                const SizedBox(width: 60),
+                // const SizedBox(width: 60),
                 
                 // Right Column - Contact Info
-                Expanded(
-                  flex: 1,
-                  child: _buildContactInfo(context),
-                ),
+                // Expanded(
+                //   flex: 1,
+                //   child: _buildContactInfo(context),
+                // ),
               ],
             ),
           ],
@@ -81,15 +81,15 @@ class AboutSection extends StatelessWidget {
     return Column(
       children: [
         _buildAboutText(context),
-        const SizedBox(height: 40),
-        _buildContactInfo(context),
+        // const SizedBox(height: 40),
+        // _buildContactInfo(context),
       ],
     );
   }
 
   Widget _buildAboutText(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           AppConstants.aboutSummary,
