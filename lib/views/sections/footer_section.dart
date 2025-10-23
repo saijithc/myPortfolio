@@ -34,35 +34,7 @@ class FooterSection extends StatelessWidget {
             // Desktop Footer
             Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo and Description
-                // Expanded(
-                //   flex: 2,
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Text(
-                //         AppConstants.appName,
-                //         style: AppTheme.headingSmall.copyWith(
-                //           color: AppTheme.neonGreen,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //       const SizedBox(height: 16),
-                //       Text(
-                //         AppConstants.aboutSummary,
-                //         style: AppTheme.bodyMedium.copyWith(
-                //           color: AppTheme.textSecondary,
-                //           height: 1.6,
-                //         ),
-                //         maxLines: 5,
-                //         overflow: TextOverflow.ellipsis,
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                
-                // const SizedBox(width: 60),
-                
+               
                 // Quick Links
                 Expanded(
                   flex: 1,
@@ -139,28 +111,7 @@ class FooterSection extends StatelessWidget {
             
             const SizedBox(height: 40),
             
-            // // Social Links
-            // Row(
-            //   children: [
-            //     Text(
-            //       'Follow me:',
-            //       style: AppTheme.bodyMedium.copyWith(
-            //         color: AppTheme.textPrimary,
-            //         fontWeight: FontWeight.w600,
-            //       ),
-            //     ),
-            //     const SizedBox(width: 16),
-            //     _buildSocialIcon(
-            //       'GitHub',
-            //       () => _launchUrl('https://${AppConstants.contactInfo.github}'),
-            //     ),
-            //     const SizedBox(width: 16),
-            //     _buildSocialIcon(
-            //       'LinkedIn',
-            //       () => _launchUrl('https://${AppConstants.contactInfo.linkedin}'),
-            //     ),
-            //   ],
-            // ),
+           
           ] else ...[
             // Mobile Footer
             Column(
@@ -336,27 +287,6 @@ class FooterSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialIcon(String tooltip, VoidCallback onTap) {
-    return Tooltip(
-      message: tooltip,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            border: Border.all(color: AppTheme.neonGreen.withOpacity(0.3)),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(
-            Icons.code,
-            color: AppTheme.neonGreen,
-            size: 20,
-          ),
-        ),
-      ),
-    );
-  }
 
   void _scrollToSection(BuildContext context, String sectionName) {
     // This will be implemented with scroll controllers
