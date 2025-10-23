@@ -31,27 +31,27 @@ class AppConstants {
     'Experience'
   ];
 
-  static const List<Skill> skills = [
+  static  List<Skill> skills = [
     // Frameworks & Languages
-    Skill(name: 'Flutter', category: 'Framework', proficiency: 95, icon: '🎯'),
-    Skill(name: 'Dart', category: 'Language', proficiency: 90, icon: '💎'),
+    Skill(name: 'Flutter', category: 'Framework', proficiency: 95, imagePath: 'assets/icons/flutter_logo.webp'),
+    Skill(name: 'Dart', category: 'Language', proficiency: 90, imagePath: 'assets/icons/dart.webp'),
     
     // State Management
-    Skill(name: 'Provider', category: 'State Management', proficiency: 90, icon: '🔄'),
-    Skill(name: 'Riverpod', category: 'State Management', proficiency: 85, icon: '🌊'),
-    Skill(name: 'GetX', category: 'State Management', proficiency: 85, icon: '⚡'),
+    Skill(name: 'Provider', category: 'State Management', proficiency: 90, imagePath: 'assets/icons/provider.jpg'),
+    Skill(name: 'Riverpod', category: 'State Management', proficiency: 85, imagePath: 'assets/icons/riverpod.png'),
+    Skill(name: 'GetX', category: 'State Management', proficiency: 85, imagePath: 'assets/icons/getx.png'),
     
     // Tools
-    Skill(name: 'Firebase', category: 'Backend', proficiency: 90, icon: '🔥'),
-    Skill(name: 'Hive', category: 'Database', proficiency: 90, icon: '📦'),
-    Skill(name: 'Figma', category: 'Design', proficiency: 75, icon: '🎨'),
-    Skill(name: 'Git', category: 'Version Control', proficiency: 100, icon: '📝'),
-    Skill(name: 'Postman', category: 'API Testing', proficiency: 80, icon: '📮'),
+    Skill(name: 'Firebase', category: 'Backend', proficiency: 90, imagePath: 'assets/icons/firebase.webp'),
+    Skill(name: 'Hive', category: 'Database', proficiency: 90, imagePath: 'assets/icons/hive.png'),
+    Skill(name: 'Figma', category: 'Design', proficiency: 75, imagePath: 'assets/icons/figma.webp'),
+    Skill(name: 'Git', category: 'Version Control', proficiency: 100, imagePath: 'assets/icons/git.webp'),
+    Skill(name: 'Postman', category: 'API Testing', proficiency: 80, imagePath: 'assets/icons/postman.webp'),
     
     // Architecture
-    Skill(name: 'MVVM', category: 'Architecture', proficiency: 90, icon: '🏗️'),
-    Skill(name: 'MVC', category: 'Architecture', proficiency: 85, icon: '🏛️'),
-    Skill(name: 'RESTful APIs', category: 'Integration', proficiency: 100, icon: '🔌'),
+    Skill(name: 'MVVM', category: 'Architecture', proficiency: 90, imagePath: 'assets/icons/mvvm.png'),
+    Skill(name: 'MVC', category: 'Architecture', proficiency: 85, imagePath: 'assets/icons/mvc.jpg'),
+    Skill(name: 'RESTful APIs', category: 'Integration', proficiency: 100, imagePath: 'assets/icons/rest-api.webp',shouldAddColor: true),
   ];
 
   static const List<Service> services = [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/models/skill.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import '../../constants/app_theme.dart';
@@ -132,7 +133,7 @@ class SkillsSection extends StatelessWidget {
       },
     );
   }
-  Widget _buildSkillCard(skill) {
+  Widget _buildSkillCard(Skill skill) {
     return GlowCard(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -140,10 +141,8 @@ class SkillsSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // Skill Icon
-          Text(
-            skill.icon,
-            style: const TextStyle(fontSize: 32),
-          ),
+          Image.asset(skill.imagePath,height: 42,width: 42,color:( skill.shouldAddColor??false) ?  Colors.white:null,),
+        
           
           const SizedBox(height: 16),
           
