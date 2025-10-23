@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/models/project.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -53,7 +54,7 @@ class ProjectsSection extends StatelessWidget {
     );
   }
 
-  Widget _buildProjectsGrid(BuildContext context, projects) {
+  Widget _buildProjectsGrid(BuildContext context,List<Project> projects) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
     final isTablet = ResponsiveBreakpoints.of(context).isTablet;
 
@@ -86,7 +87,7 @@ class ProjectsSection extends StatelessWidget {
     }
   }
 
-  Widget _buildProjectCard(BuildContext context, project) {
+  Widget _buildProjectCard(BuildContext context,Project project) {
     return GlowCard(
       padding: const EdgeInsets.all(0),
       child: Column(
