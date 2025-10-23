@@ -3,6 +3,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import '../../constants/app_theme.dart';
 import '../../widgets/animated_counter.dart';
 import '../../widgets/glow_card.dart';
+import '../../utils/text_utils.dart';
 
 class WhyHireSection extends StatelessWidget {
   const WhyHireSection({super.key});
@@ -20,24 +21,21 @@ class WhyHireSection extends StatelessWidget {
       child: Column(
         children: [
           // Section Title
-          Text(
-            'Why Hire Me?',
-            style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                .copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textCustom(
+            text: 'Why Hire Me?',
+            color: AppTheme.textPrimary,
+            fontSize: isMobile ? 24 : 32,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 20),
           
           // Section Subtitle
-          Text(
-            'What sets me apart from others',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'What sets me apart from others',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 60),
@@ -99,7 +97,7 @@ class WhyHireSection extends StatelessWidget {
           crossAxisCount: isTablet ? 2 : 3,
           crossAxisSpacing: 80,
           mainAxisSpacing: 44,
-          childAspectRatio: 1.0,
+          childAspectRatio: 0.9, // Reduced aspect ratio to accommodate content
         ),
         itemCount: reasons.length,
         itemBuilder: (context, index) {
@@ -111,18 +109,19 @@ class WhyHireSection extends StatelessWidget {
 
   Widget _buildWhyHireCard(Map<String, dynamic> reason) {
     return GlowCard(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       isGlowing: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Icon
-          Text(
-            reason['icon'],
-            style: const TextStyle(fontSize: 48),
+          textCustom(
+            text: reason['icon'],
+            color: AppTheme.neonGreen,
+            fontSize: 40,
           ),
           
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
           
           // Animated Counter
           AnimatedCounter(
@@ -137,34 +136,26 @@ class WhyHireSection extends StatelessWidget {
           const SizedBox(height: 8),
           
           // Subtitle
-          Text(
-            reason['subtitle'],
-            style: AppTheme.bodySmall.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w500,
-            ),
+          textMediumSmall(
+            text: reason['subtitle'],
+            color: AppTheme.neonGreen,
           ),
           
           const SizedBox(height: 16),
           
           // Title
-          Text(
-            reason['title'],
-            style: AppTheme.headingSmall.copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textBoldDefault(
+            text: reason['title'],
+            color: AppTheme.textPrimary,
             textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 12),
           
           // Description
-          Text(
-            reason['description'],
-            style: AppTheme.bodyMedium.copyWith(
-              color: AppTheme.textSecondary,
-            ),
+          textRegularDefault(
+            text: reason['description'],
+            color: AppTheme.textSecondary,
             textAlign: TextAlign.center,
           ),
         ],

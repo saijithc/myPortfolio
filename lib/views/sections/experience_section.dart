@@ -4,6 +4,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import '../../constants/app_theme.dart';
 import '../../view_models/portfolio_view_model.dart';
 import '../../widgets/glow_card.dart';
+import '../../utils/text_utils.dart';
 
 class ExperienceSection extends StatelessWidget {
   const ExperienceSection({super.key});
@@ -21,24 +22,21 @@ class ExperienceSection extends StatelessWidget {
       child: Column(
         children: [
           // Section Title
-          Text(
-            'Work Experience',
-            style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                .copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textCustom(
+            text: 'Work Experience',
+            color: AppTheme.textPrimary,
+            fontSize: isMobile ? 24 : 32,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 20),
           
           // Section Subtitle
-          Text(
-            'My professional journey',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'My professional journey',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 60),

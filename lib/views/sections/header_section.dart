@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants/app_constants.dart';
 import '../../constants/app_theme.dart';
 import '../../widgets/typing_animation.dart';
+import '../../utils/text_utils.dart';
 
 class HeaderSection extends StatelessWidget {
   final ScrollController scrollController;
@@ -29,12 +30,9 @@ class HeaderSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Logo
-                Text(
-                  AppConstants.appName,
-                  style: AppTheme.headingSmall.copyWith(
-                    color: AppTheme.neonGreen,
-                    fontWeight: FontWeight.bold,
-                  ),
+                textBoldDefault(
+                  text: AppConstants.appName,
+                  color: AppTheme.neonGreen,
                 ),
                 
                 // Navigation Menu
@@ -45,12 +43,9 @@ class HeaderSection extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: TextButton(
                           onPressed: () => _scrollToSection(context, item),
-                          child: Text(
-                            item,
-                            style: AppTheme.bodyMedium.copyWith(
-                              color: AppTheme.textPrimary,
-                              fontWeight: FontWeight.w500,
-                            ),
+                          child: textMediumDefault(
+                            text: item,
+                            color: AppTheme.textPrimary,
                           ),
                         ),
                       );
@@ -117,13 +112,11 @@ class HeaderSection extends StatelessWidget {
                   const SizedBox(height: 40),
                   
                   // Main Tagline
-                  Text(
-                    AppConstants.tagline,
-                    style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                        .copyWith(
-                      color: AppTheme.textPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  textCustom(
+                    text: AppConstants.tagline,
+                    color: AppTheme.textPrimary,
+                    fontSize: isMobile ? 24 : 32,
+                    fontWeight: FontWeight.bold,
                     textAlign: TextAlign.center,
                   ),
                   
@@ -208,12 +201,9 @@ class HeaderSection extends StatelessWidget {
           ),
           elevation: isPrimary ? 8 : 0,
         ),
-        child: Text(
-          text,
-          style: AppTheme.buttonText.copyWith(
-            color: isPrimary ? AppTheme.primaryDark : AppTheme.neonGreen,
-            fontWeight: FontWeight.bold,
-          ),
+        child: textBoldDefault(
+          text: text,
+          color: isPrimary ? AppTheme.primaryDark : AppTheme.neonGreen,
         ),
       ),
     );
@@ -286,11 +276,9 @@ class HeaderSection extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: AppConstants.navigationItems.map<Widget>((item) {
             return ListTile(
-              title: Text(
-                item,
-                style: AppTheme.bodyLarge.copyWith(
-                  color: AppTheme.textPrimary,
-                ),
+              title: textRegularLarge(
+                text: item,
+                color: AppTheme.textPrimary,
               ),
               onTap: () {
                 Navigator.pop(context);

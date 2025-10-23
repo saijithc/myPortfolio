@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants/app_theme.dart';
 import '../../view_models/portfolio_view_model.dart';
 import '../../widgets/glow_card.dart';
+import '../../utils/text_utils.dart';
 
 class ProjectsSection extends StatelessWidget {
   const ProjectsSection({super.key});
@@ -22,24 +23,21 @@ class ProjectsSection extends StatelessWidget {
       child: Column(
         children: [
           // Section Title
-          Text(
-            'Featured Projects',
-            style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                .copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textCustom(
+            text: 'Featured Projects',
+            color: AppTheme.textPrimary,
+            fontSize: isMobile ? 24 : 32,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 20),
           
           // Section Subtitle
-          Text(
-            'Some of my recent work',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'Some of my recent work',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 60),

@@ -6,6 +6,7 @@ import '../../constants/app_constants.dart';
 import '../../constants/app_theme.dart';
 import '../../view_models/portfolio_view_model.dart';
 import '../../widgets/glow_card.dart';
+import '../../utils/text_utils.dart';
 
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
@@ -23,24 +24,21 @@ class ContactSection extends StatelessWidget {
       child: Column(
         children: [
           // Section Title
-          Text(
-            'Get In Touch',
-            style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                .copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textCustom(
+            text: 'Get In Touch',
+            color: AppTheme.textPrimary,
+            fontSize: isMobile ? 24 : 32,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 20),
           
           // Section Subtitle
-          Text(
-            'Let\'s discuss your project',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'Let\'s discuss your project',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 60),
@@ -91,12 +89,9 @@ class ContactSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Contact Information',
-            style: AppTheme.headingSmall.copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textBoldDefault(
+            text: 'Contact Information',
+            color: AppTheme.textPrimary,
           ),
           
           const SizedBox(height: 24),
@@ -136,12 +131,9 @@ class ContactSection extends StatelessWidget {
           const SizedBox(height: 32),
           
           // Social Links
-          Text(
-            'Connect with me',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'Connect with me',
+            color: AppTheme.textPrimary,
           ),
           
           const SizedBox(height: 16),
@@ -189,19 +181,15 @@ class ContactSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    label,
-                    style: AppTheme.bodySmall.copyWith(
-                      color: AppTheme.textTertiary,
-                    ),
+                  textRegularSmall(
+                    text: label,
+                    color: AppTheme.textTertiary,
                   ),
                   const SizedBox(height: 4),
-                  Text(
-                    value,
-                    style: AppTheme.bodyMedium.copyWith(
-                      color: AppTheme.textPrimary,
-                      fontWeight: onTap != null ? FontWeight.w500 : FontWeight.normal,
-                    ),
+                  textCustom(
+                    text: value,
+                    color: AppTheme.textPrimary,
+                    fontWeight: onTap != null ? FontWeight.w500 : FontWeight.normal,
                   ),
                 ],
               ),
@@ -237,12 +225,10 @@ class ContactSection extends StatelessWidget {
                 size: 24,
               ),
               const SizedBox(height: 8),
-              Text(
-                label,
-                style: AppTheme.bodyMedium.copyWith(
-                  color: AppTheme.neonGreen,
-                  fontWeight: FontWeight.w500,
-                ),
+              textMediumDefault(
+                text: label,
+                color: AppTheme.neonGreen,
+                textAlign: TextAlign.center,
               ),
             ],
           ),
@@ -261,12 +247,9 @@ class ContactSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Send me a message',
-                  style: AppTheme.headingSmall.copyWith(
-                    color: AppTheme.textPrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
+                textBoldDefault(
+                  text: 'Send me a message',
+                  color: AppTheme.textPrimary,
                 ),
                 
                 const SizedBox(height: 24),
@@ -333,12 +316,9 @@ class ContactSection extends StatelessWidget {
                               strokeWidth: 2,
                             ),
                           )
-                        : Text(
-                            'Send Message',
-                            style: AppTheme.buttonText.copyWith(
-                              color: AppTheme.primaryDark,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        : textBoldDefault(
+                            text: 'Send Message',
+                            color: AppTheme.primaryDark,
                           ),
                   ),
                 ),

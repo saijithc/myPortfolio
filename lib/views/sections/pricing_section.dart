@@ -4,6 +4,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import '../../constants/app_theme.dart';
 import '../../view_models/portfolio_view_model.dart';
 import '../../widgets/glow_card.dart';
+import '../../utils/text_utils.dart';
 
 class PricingSection extends StatelessWidget {
   const PricingSection({super.key});
@@ -21,24 +22,21 @@ class PricingSection extends StatelessWidget {
       child: Column(
         children: [
           // Section Title
-          Text(
-            'Pricing Plans',
-            style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                .copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textCustom(
+            text: 'Pricing Plans',
+            color: AppTheme.textPrimary,
+            fontSize: isMobile ? 24 : 32,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 20),
           
           // Section Subtitle
-          Text(
-            'Choose the perfect plan for your project',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'Choose the perfect plan for your project',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 60),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/utils/text_utils.dart';
 import 'dart:ui';
 
 class BlurryLoadingWidget extends StatefulWidget {
@@ -218,14 +219,9 @@ class _BlurryLoadingWidgetState extends State<BlurryLoadingWidget>
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                Text(
-                                  'Loading...',
-                                  style: TextStyle(
-                                    color: Colors.white.withValues(alpha: 0.8),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 1.2,
-                                  ),
+                                textMediumSmall(
+                                  text: 'Loading...',
+                                  color: Colors.white.withValues(alpha: 0.8),
                                 ),
                               ],
                             ),

@@ -4,6 +4,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import '../../constants/app_theme.dart';
 import '../../view_models/portfolio_view_model.dart';
 import '../../widgets/glow_card.dart';
+import '../../utils/text_utils.dart';
 
 class ServicesSection extends StatelessWidget {
   const ServicesSection({super.key});
@@ -21,24 +22,21 @@ class ServicesSection extends StatelessWidget {
       child: Column(
         children: [
           // Section Title
-          Text(
-            'Services I Offer',
-            style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                .copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textCustom(
+            text: 'Services I Offer',
+            color: AppTheme.textPrimary,
+            fontSize: isMobile ? 24 : 32,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 20),
           
           // Section Subtitle
-          Text(
-            'What I can do for your business',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'What I can do for your business',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 60),
@@ -78,7 +76,7 @@ class ServicesSection extends StatelessWidget {
           crossAxisCount: isTablet ? 2 : 3,
           crossAxisSpacing: 24,
           mainAxisSpacing: 24,
-          childAspectRatio: 1.0,
+          childAspectRatio: 0.9, // Reduced aspect ratio to accommodate content
         ),
         itemCount: services.length,
         itemBuilder: (context, index) {
@@ -108,9 +106,10 @@ class ServicesSection extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Text(
-                service.icon,
-                style: const TextStyle(fontSize: 28),
+              child: textCustom(
+                text: service.icon,
+                color: AppTheme.neonGreen,
+                fontSize: 28,
               ),
             ),
           ),
@@ -118,23 +117,17 @@ class ServicesSection extends StatelessWidget {
           const SizedBox(height: 20),
           
           // Service Title
-          Text(
-            service.title,
-            style: AppTheme.headingSmall.copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textBoldDefault(
+            text: service.title,
+            color: AppTheme.textPrimary,
           ),
           
           const SizedBox(height: 12),
           
           // Service Description
-          Text(
-            service.description,
-            style: AppTheme.bodyMedium.copyWith(
-              color: AppTheme.textSecondary,
-              height: 1.5,
-            ),
+          textRegularDefault(
+            text: service.description,
+            color: AppTheme.textSecondary,
           ),
           
           const SizedBox(height: 20),
@@ -155,11 +148,9 @@ class ServicesSection extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Text(
-                      feature,
-                      style: AppTheme.bodySmall.copyWith(
-                        color: AppTheme.textTertiary,
-                      ),
+                    child: textRegularSmall(
+                      text: feature,
+                      color: AppTheme.textTertiary,
                     ),
                   ),
                 ],
@@ -180,12 +171,9 @@ class ServicesSection extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Text(
-              'Learn More',
-              style: AppTheme.bodyMedium.copyWith(
-                color: AppTheme.neonGreen,
-                fontWeight: FontWeight.w600,
-              ),
+            child: textSemiBoldDefault(
+              text: 'Learn More',
+              color: AppTheme.neonGreen,
               textAlign: TextAlign.center,
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../constants/app_constants.dart';
 import '../../constants/app_theme.dart';
+import '../../utils/text_utils.dart';
 
 class FooterSection extends StatelessWidget {
   const FooterSection({super.key});
@@ -68,12 +69,9 @@ class FooterSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Quick Links',
-                        style: AppTheme.bodyLarge.copyWith(
-                          color: AppTheme.textPrimary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      textBoldLarge(
+                        text: 'Quick Links',
+                        color: AppTheme.textPrimary,
                       ),
                       const SizedBox(height: 16),
                       ...AppConstants.navigationItems.map<Widget>((item) {
@@ -81,11 +79,9 @@ class FooterSection extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 8),
                           child: InkWell(
                             onTap: () => _scrollToSection(context, item),
-                            child: Text(
-                              item,
-                              style: AppTheme.bodyMedium.copyWith(
-                                color: AppTheme.textSecondary,
-                              ),
+                            child: textRegularDefault(
+                              text: item,
+                              color: AppTheme.textSecondary,
                             ),
                           ),
                         );
@@ -102,12 +98,9 @@ class FooterSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Contact Info',
-                        style: AppTheme.bodyLarge.copyWith(
-                          color: AppTheme.textPrimary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      textBoldLarge(
+                        text: 'Contact Info',
+                        color: AppTheme.textPrimary,
                       ),
                       const SizedBox(height: 16),
                       _buildContactFooterItem(
@@ -115,13 +108,25 @@ class FooterSection extends StatelessWidget {
                         AppConstants.contactInfo.email,
                         onTap: () => _launchEmail(AppConstants.contactInfo.email),
                       ),
+                     
+                     
+                     
                       const SizedBox(height: 8),
+                      _buildContactFooterItem(
+                        Icons.work,
+                        'LinkedIn',
+                        onTap: () => _launchUrl('https://${AppConstants.contactInfo.linkedin}'),
+                      ), const SizedBox(height: 8),
+                      _buildContactFooterItem(
+                        Icons.code,
+                        'GitHub',
+                        onTap: () => _launchUrl('https://${AppConstants.contactInfo.github}'),
+                      ), const SizedBox(height: 8),
                       _buildContactFooterItem(
                         Icons.phone,
                         AppConstants.contactInfo.phone,
                         onTap: () => _launchPhone(AppConstants.contactInfo.phone),
-                      ),
-                      const SizedBox(height: 8),
+                      ), const SizedBox(height: 8),
                       _buildContactFooterItem(
                         Icons.location_on,
                         AppConstants.contactInfo.location,
@@ -164,20 +169,14 @@ class FooterSection extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      AppConstants.appName,
-                      style: AppTheme.headingSmall.copyWith(
-                        color: AppTheme.neonGreen,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    textBoldDefault(
+                      text: AppConstants.appName,
+                      color: AppTheme.neonGreen,
                     ),
                     const SizedBox(height: 16),
-                    Text(
-                      AppConstants.aboutSummary,
-                      style: AppTheme.bodyMedium.copyWith(
-                        color: AppTheme.textSecondary,
-                        height: 1.6,
-                      ),
+                    textRegularDefault(
+                      text: AppConstants.aboutSummary,
+                      color: AppTheme.textSecondary,
                     ),
                   ],
                 ),
@@ -188,12 +187,9 @@ class FooterSection extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Quick Links',
-                      style: AppTheme.bodyLarge.copyWith(
-                        color: AppTheme.textPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    textBoldLarge(
+                      text: 'Quick Links',
+                      color: AppTheme.textPrimary,
                     ),
                     const SizedBox(height: 16),
                     Wrap(
@@ -202,11 +198,9 @@ class FooterSection extends StatelessWidget {
                       children: AppConstants.navigationItems.map<Widget>((item) {
                         return InkWell(
                           onTap: () => _scrollToSection(context, item),
-                          child: Text(
-                            item,
-                            style: AppTheme.bodyMedium.copyWith(
-                              color: AppTheme.textSecondary,
-                            ),
+                          child: textRegularDefault(
+                            text: item,
+                            color: AppTheme.textSecondary,
                           ),
                         );
                       }).toList(),
@@ -220,12 +214,9 @@ class FooterSection extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Contact Info',
-                      style: AppTheme.bodyLarge.copyWith(
-                        color: AppTheme.textPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    textBoldLarge(
+                      text: 'Contact Info',
+                      color: AppTheme.textPrimary,
                     ),
                     const SizedBox(height: 16),
                     _buildContactFooterItem(
@@ -243,6 +234,18 @@ class FooterSection extends StatelessWidget {
                     _buildContactFooterItem(
                       Icons.location_on,
                       AppConstants.contactInfo.location,
+                    ),
+                    const SizedBox(height: 8),
+                    _buildContactFooterItem(
+                      Icons.code,
+                      'GitHub',
+                      onTap: () => _launchUrl('https://${AppConstants.contactInfo.github}'),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildContactFooterItem(
+                      Icons.work,
+                      'LinkedIn',
+                      onTap: () => _launchUrl('https://${AppConstants.contactInfo.linkedin}'),
                     ),
                   ],
                 ),
@@ -294,11 +297,9 @@ class FooterSection extends StatelessWidget {
           const SizedBox(height: 24),
           
           // Copyright
-          Text(
-            '© 2024 ${AppConstants.contactInfo.name}. All rights reserved.',
-            style: AppTheme.bodyMedium.copyWith(
-              color: AppTheme.textTertiary,
-            ),
+          textRegularDefault(
+            text: '© 2024 ${AppConstants.contactInfo.name}. All rights reserved.',
+            color: AppTheme.textTertiary,
             textAlign: TextAlign.center,
           ),
         ],
@@ -324,11 +325,9 @@ class FooterSection extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: Text(
-                text,
-                style: AppTheme.bodySmall.copyWith(
-                  color: AppTheme.textSecondary,
-                ),
+              child: textRegularSmall(
+                text: text,
+                color: AppTheme.textSecondary,
               ),
             ),
           ],

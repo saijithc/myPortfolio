@@ -5,6 +5,7 @@ import '../../constants/app_constants.dart';
 import '../../constants/app_theme.dart';
 import '../../widgets/animated_counter.dart';
 import '../../widgets/glow_card.dart';
+import '../../utils/text_utils.dart';
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
@@ -22,24 +23,21 @@ class AboutSection extends StatelessWidget {
       child: Column(
         children: [
           // Section Title
-          Text(
-            'About Me',
-            style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                .copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textCustom(
+            text: 'About Me',
+            color: AppTheme.textPrimary,
+            fontSize: isMobile ? 24 : 32,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 20),
           
           // Section Subtitle
-          Text(
-            'Get to know me better',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'Get to know me better',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 60),
@@ -91,12 +89,10 @@ class AboutSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          AppConstants.aboutSummary,
-          style: AppTheme.bodyLarge.copyWith(
-            color: AppTheme.textSecondary,
-            height: 1.6,
-          ),
+        textRegularLarge(
+          text: AppConstants.aboutSummary,
+          color: AppTheme.textSecondary,
+          textAlign: TextAlign.center,
         ),
         
         const SizedBox(height: 30),
@@ -110,11 +106,9 @@ class AboutSection extends StatelessWidget {
               size: 20,
             ),
             const SizedBox(width: 8),
-            Text(
-              AppConstants.contactInfo.location,
-              style: AppTheme.bodyMedium.copyWith(
-                color: AppTheme.textPrimary,
-              ),
+            textCustom(
+              text: AppConstants.contactInfo.location,
+              color: AppTheme.textPrimary,
             ),
           ],
         ),
@@ -129,12 +123,9 @@ class AboutSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Contact Information',
-            style: AppTheme.headingSmall.copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textBoldDefault(
+            text: 'Contact Information',
+            color: AppTheme.textPrimary,
           ),
           
           const SizedBox(height: 24),
@@ -174,12 +165,9 @@ class AboutSection extends StatelessWidget {
           const SizedBox(height: 32),
           
           // Social Links
-          Text(
-            'Connect with me',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'Connect with me',
+            color: AppTheme.textPrimary,
           ),
           
           const SizedBox(height: 16),
@@ -222,12 +210,10 @@ class AboutSection extends StatelessWidget {
                 size: 24,
               ),
               const SizedBox(height: 8),
-              Text(
-                label,
-                style: AppTheme.bodyMedium.copyWith(
-                  color: AppTheme.neonGreen,
-                  fontWeight: FontWeight.w500,
-                ),
+              textMediumDefault(
+                text: label,
+                color: AppTheme.neonGreen,
+                textAlign: TextAlign.center,
               ),
             ],
           ),
@@ -329,19 +315,15 @@ class AboutSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    label,
-                    style: AppTheme.bodySmall.copyWith(
-                      color: AppTheme.textTertiary,
-                    ),
+                  textRegularSmall(
+                    text: label,
+                    color: AppTheme.textTertiary,
                   ),
                   const SizedBox(height: 2),
-                  Text(
-                    value,
-                    style: AppTheme.bodyMedium.copyWith(
-                      color: AppTheme.textPrimary,
-                      fontWeight: onTap != null ? FontWeight.w500 : FontWeight.normal,
-                    ),
+                  textCustom(
+                    text: value,
+                    color: AppTheme.textPrimary,
+                    fontWeight: onTap != null ? FontWeight.w500 : FontWeight.normal,
                   ),
                 ],
               ),
@@ -386,12 +368,10 @@ class AboutSection extends StatelessWidget {
 
     return Column(
       children: [
-        Text(
-          'My Achievements',
-          style: AppTheme.headingSmall.copyWith(
-            color: AppTheme.textPrimary,
-            fontWeight: FontWeight.bold,
-          ),
+        textBoldDefault(
+          text: 'My Achievements',
+          color: AppTheme.textPrimary,
+          textAlign: TextAlign.center,
         ),
         
         const SizedBox(height: 40),
@@ -425,16 +405,17 @@ class AboutSection extends StatelessWidget {
 
   Widget _buildAchievementCard(achievement) {
     return GlowCard(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            achievement.icon,
-            style: const TextStyle(fontSize: 32),
+          textCustom(
+            text: achievement.icon,
+            color: AppTheme.neonGreen,
+            fontSize: 28,
           ),
           
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           
           AnimatedCounter(
             value: achievement.value,
@@ -445,24 +426,19 @@ class AboutSection extends StatelessWidget {
             ),
           ),
           
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           
-          Text(
-            achievement.title,
-            style: AppTheme.bodyMedium.copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldDefault(
+            text: achievement.title,
+            color: AppTheme.textPrimary,
             textAlign: TextAlign.center,
           ),
           
-          const SizedBox(height: 4),
+          const SizedBox(height: 2),
           
-          Text(
-            achievement.description,
-            style: AppTheme.bodySmall.copyWith(
-              color: AppTheme.textSecondary,
-            ),
+          textRegularSmall(
+            text: achievement.description,
+            color: AppTheme.textSecondary,
             textAlign: TextAlign.center,
           ),
         ],

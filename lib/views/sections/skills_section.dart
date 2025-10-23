@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants/app_theme.dart';
 import '../../view_models/portfolio_view_model.dart';
 import '../../widgets/glow_card.dart';
+import '../../utils/text_utils.dart';
 
 class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key});
@@ -29,24 +30,21 @@ class SkillsSection extends StatelessWidget {
         child: Column(
           children: [
           // Section Title
-          Text(
-            'Skills & Expertise',
-            style: (isMobile ? AppTheme.headingMedium : AppTheme.headingLarge)
-                .copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.bold,
-            ),
+          textCustom(
+            text: 'Skills & Expertise',
+            color: AppTheme.textPrimary,
+            fontSize: isMobile ? 24 : 32,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 20),
           
           // Section Subtitle
-          Text(
-            'Technologies I work with',
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldLarge(
+            text: 'Technologies I work with',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
           const SizedBox(height: 60),
@@ -75,12 +73,10 @@ class SkillsSection extends StatelessWidget {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: Text(
-            "No skills to display.",
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.textSecondary,
-              fontWeight: FontWeight.w500,
-            ),
+          child: textMediumLarge(
+            text: "No skills to display.",
+            color: AppTheme.textSecondary,
+            textAlign: TextAlign.center,
           ),
         ),
       );
@@ -122,7 +118,7 @@ class SkillsSection extends StatelessWidget {
               crossAxisCount: crossAxisCount,
               crossAxisSpacing: isMobile ? 16 : isDesktop ? 32 : 24,
               mainAxisSpacing: isMobile ? 16 : isDesktop ? 32 : 24,
-              childAspectRatio: 1.0,
+              childAspectRatio: isMobile ? 0.85 : 0.9, // Reduced aspect ratio to accommodate content
             ),
             itemCount: allSkills.length,
             itemBuilder: (context, index) {
@@ -138,36 +134,43 @@ class SkillsSection extends StatelessWidget {
     return GlowCard(
       padding: const EdgeInsets.all(20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
           // Skill Icon
-          Image.asset(skill.imagePath,height: 42,width: 42,color:( skill.shouldAddColor??false) ?  Colors.white:null,),
+          SizedBox(
+            height: 42,
+            width: 42,
+            child: Image.asset(
+              skill.imagePath,
+              height: 42,
+              width: 42,
+              color: (skill.shouldAddColor ?? false) ? Colors.white : null,
+              fit: BoxFit.contain,
+            ),
+          ),
         
           
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           
           // Skill Name
-          Text(
-            skill.name,
-            style: AppTheme.bodyLarge.copyWith(
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.w600,
-            ),
+          textSemiBoldDefault(
+            text: skill.name,
+            color: AppTheme.textPrimary,
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
           
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           
           // Proficiency Bar
           Container(
             width: double.infinity,
-            height: 6,
+            height: 4,
             decoration: BoxDecoration(
               color: AppTheme.accentDark,
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(2),
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
@@ -175,24 +178,22 @@ class SkillsSection extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: AppTheme.neonGradient,
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(2),
                 ),
               ),
             ),
           ),
           
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           
           // Proficiency Percentage
-          Text(
-            '${skill.proficiency}%',
-            style: AppTheme.bodySmall.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.w500,
-            ),
+          textMediumMicro(
+            text: '${skill.proficiency}%',
+            color: AppTheme.neonGreen,
+            textAlign: TextAlign.center,
           ),
           
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           
           // Learn More Button
           if (skill.learnMoreUrl != null)
@@ -204,18 +205,16 @@ class SkillsSection extends StatelessWidget {
                   backgroundColor: AppTheme.accentDark,
                   foregroundColor: AppTheme.neonGreen,
                   elevation: 0,
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(6),
                     side: BorderSide(color: AppTheme.neonGreen.withOpacity(0.3)),
                   ),
                 ),
-                child: Text(
-                  'Learn More',
-                  style: AppTheme.bodySmall.copyWith(
-                    color: AppTheme.neonGreen,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: textSemiBoldMicro(
+                  text: 'Learn More',
+                  color: AppTheme.neonGreen,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
