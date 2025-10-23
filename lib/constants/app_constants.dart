@@ -33,25 +33,25 @@ class AppConstants {
 
   static  List<Skill> skills = [
     // Frameworks & Languages
-    Skill(name: 'Flutter', category: 'Framework', proficiency: 95, imagePath: 'assets/icons/flutter_logo.webp'),
-    Skill(name: 'Dart', category: 'Language', proficiency: 90, imagePath: 'assets/icons/dart.webp'),
+    Skill(name: 'Flutter', category: 'Framework', proficiency: 95, imagePath: 'assets/icons/flutter_logo.webp', learnMoreUrl: 'https://flutter.dev'),
+    Skill(name: 'Dart', category: 'Language', proficiency: 90, imagePath: 'assets/icons/dart.webp', learnMoreUrl: 'https://dart.dev'),
     
     // State Management
-    Skill(name: 'Provider', category: 'State Management', proficiency: 90, imagePath: 'assets/icons/provider.jpg'),
-    Skill(name: 'Riverpod', category: 'State Management', proficiency: 85, imagePath: 'assets/icons/riverpod.png'),
-    Skill(name: 'GetX', category: 'State Management', proficiency: 85, imagePath: 'assets/icons/getx.png'),
+    Skill(name: 'Provider', category: 'State Management', proficiency: 90, imagePath: 'assets/icons/provider.jpg', learnMoreUrl: 'https://pub.dev/packages/provider'),
+    Skill(name: 'Riverpod', category: 'State Management', proficiency: 85, imagePath: 'assets/icons/riverpod.png', learnMoreUrl: 'https://riverpod.dev'),
+    Skill(name: 'GetX', category: 'State Management', proficiency: 85, imagePath: 'assets/icons/getx.png', learnMoreUrl: 'https://pub.dev/packages/get'),
     
     // Tools
-    Skill(name: 'Firebase', category: 'Backend', proficiency: 90, imagePath: 'assets/icons/firebase.webp'),
-    Skill(name: 'Hive', category: 'Database', proficiency: 90, imagePath: 'assets/icons/hive.png'),
-    Skill(name: 'Figma', category: 'Design', proficiency: 75, imagePath: 'assets/icons/figma.webp'),
-    Skill(name: 'Git', category: 'Version Control', proficiency: 100, imagePath: 'assets/icons/git.webp'),
-    Skill(name: 'Postman', category: 'API Testing', proficiency: 80, imagePath: 'assets/icons/postman.webp'),
+    Skill(name: 'Firebase', category: 'Backend', proficiency: 90, imagePath: 'assets/icons/firebase.webp', learnMoreUrl: 'https://firebase.google.com'),
+    Skill(name: 'Hive', category: 'Database', proficiency: 90, imagePath: 'assets/icons/hive.png', learnMoreUrl: 'https://pub.dev/packages/hive'),
+    Skill(name: 'Figma', category: 'Design', proficiency: 75, imagePath: 'assets/icons/figma.webp', learnMoreUrl: 'https://figma.com'),
+    Skill(name: 'Git', category: 'Version Control', proficiency: 100, imagePath: 'assets/icons/git.webp', learnMoreUrl: 'https://git-scm.com'),
+    Skill(name: 'Postman', category: 'API Testing', proficiency: 80, imagePath: 'assets/icons/postman.webp', learnMoreUrl: 'https://postman.com'),
     
     // Architecture
-    Skill(name: 'MVVM', category: 'Architecture', proficiency: 90, imagePath: 'assets/icons/mvvm.png'),
-    Skill(name: 'MVC', category: 'Architecture', proficiency: 85, imagePath: 'assets/icons/mvc.jpg'),
-    Skill(name: 'RESTful APIs', category: 'Integration', proficiency: 100, imagePath: 'assets/icons/rest-api.webp',shouldAddColor: true),
+    Skill(name: 'MVVM', category: 'Architecture', proficiency: 90, imagePath: 'assets/icons/mvvm.png', learnMoreUrl: 'https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel'),
+    Skill(name: 'MVC', category: 'Architecture', proficiency: 85, imagePath: 'assets/icons/mvc.jpg', learnMoreUrl: 'https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller'),
+    Skill(name: 'RESTful APIs', category: 'Integration', proficiency: 100, imagePath: 'assets/icons/rest-api.webp',shouldAddColor: true, learnMoreUrl: 'https://restfulapi.net'),
   ];
 
   static const List<Service> services = [
@@ -230,7 +230,7 @@ class AppConstants {
     Achievement(
       title: 'Projects Completed',
       description: 'Successfully delivered projects',
-      value: 30,
+      value: 20,
       suffix: '+',
       icon: '🚀',
     ),

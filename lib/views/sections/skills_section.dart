@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio/models/skill.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../constants/app_theme.dart';
 import '../../view_models/portfolio_view_model.dart';
 import '../../widgets/glow_card.dart';
@@ -190,8 +191,43 @@ class SkillsSection extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
+          
+          const SizedBox(height: 16),
+          
+          // Learn More Button
+          if (skill.learnMoreUrl != null)
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => _launchUrl(skill.learnMoreUrl!),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.accentDark,
+                  foregroundColor: AppTheme.neonGreen,
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(color: AppTheme.neonGreen.withOpacity(0.3)),
+                  ),
+                ),
+                child: Text(
+                  'Learn More',
+                  style: AppTheme.bodySmall.copyWith(
+                    color: AppTheme.neonGreen,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
   }
 }
