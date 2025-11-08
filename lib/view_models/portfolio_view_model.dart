@@ -13,6 +13,19 @@ class PortfolioViewModel extends ChangeNotifier {
   int _currentSection = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // Section keys for scroll-to-section
+  final GlobalKey _headerKey = GlobalKey();
+  final GlobalKey _aboutKey = GlobalKey();
+  final GlobalKey _achievementsKey = GlobalKey();
+  final GlobalKey _skillsKey = GlobalKey();
+  final GlobalKey _servicesKey = GlobalKey();
+  final GlobalKey _experienceKey = GlobalKey();
+  final GlobalKey _projectsKey = GlobalKey();
+  final GlobalKey _caseStudiesKey = GlobalKey();
+  final GlobalKey _whyHireKey = GlobalKey();
+  final GlobalKey _pricingKey = GlobalKey();
+  final GlobalKey _contactKey = GlobalKey();
+
   // Contact form
   final GlobalKey<FormState> _contactFormKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
@@ -28,6 +41,17 @@ class PortfolioViewModel extends ChangeNotifier {
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
   GlobalKey<FormState> get contactFormKey => _contactFormKey;
   ScrollController get scrollController => _scrollController;
+  GlobalKey get headerKey => _headerKey;
+  GlobalKey get aboutKey => _aboutKey;
+  GlobalKey get achievementsKey => _achievementsKey;
+  GlobalKey get skillsKey => _skillsKey;
+  GlobalKey get servicesKey => _servicesKey;
+  GlobalKey get experienceKey => _experienceKey;
+  GlobalKey get projectsKey => _projectsKey;
+  GlobalKey get caseStudiesKey => _caseStudiesKey;
+  GlobalKey get whyHireKey => _whyHireKey;
+  GlobalKey get pricingKey => _pricingKey;
+  GlobalKey get contactKey => _contactKey;
   
   // Contact form getters
   TextEditingController get nameController => _nameController;

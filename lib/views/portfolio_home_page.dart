@@ -40,46 +40,58 @@ class PortfolioHomePage extends StatelessWidget {
                   children: [
                   // Header Section
                   ScrollTriggeredLoadingWidget(
-                    child: HeaderSection(scrollController: viewModel.scrollController),
+                    key: viewModel.headerKey,
+                    child: HeaderSection(
+                      key: viewModel.headerKey,
+                      scrollController: viewModel.scrollController,
+                    ),
                   ),
                   
                   // About Section
                   ScrollTriggeredLoadingWidget(
+                    key: viewModel.aboutKey,
                     child: const AboutSection(),
                   ),
                   
                   // Skills Section
                   ScrollTriggeredLoadingWidget(
+                    key: viewModel.skillsKey,
                     child: const SkillsSection(),
                   ),
                   
                   // Services Section
                   ScrollTriggeredLoadingWidget(
+                    key: viewModel.servicesKey,
                     child: const ServicesSection(),
                   ),
                   
                   // Experience Section
                   ScrollTriggeredLoadingWidget(
+                    key: viewModel.experienceKey,
                     child: const ExperienceSection(),
                   ),
                   
                   // Projects Section
                   ScrollTriggeredLoadingWidget(
+                    key: viewModel.projectsKey,
                     child: const ProjectsSection(),
                   ),
                   
                   // Why Hire Me Section
                   ScrollTriggeredLoadingWidget(
+                    key: viewModel.whyHireKey,
                     child: const WhyHireSection(),
                   ),
                   
                   // Pricing Section
                   // ScrollTriggeredLoadingWidget(
+                  //   key: viewModel.pricingKey,
                   //   child: const PricingSection(),
                   // ),
                   
                   // Contact Section
                   // ScrollTriggeredLoadingWidget(
+                  //   key: viewModel.contactKey,
                   //   child: const ContactSection(),
                   // ),
                   

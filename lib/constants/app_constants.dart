@@ -87,9 +87,9 @@ class AppConstants {
     ),
     Service(
       title: 'Code Architecture Consulting',
-      description: 'MVVM, scalable patterns',
+      description: 'MVVM, MVC, scalable patterns',
       icon: '🏗️',
-      features: ['Clean Architecture', 'Scalable Patterns', 'Code Review', 'Best Practices'],
+      features: ['MVVM', 'MVC', 'Scalable Patterns', 'Code Review', 'Best Practices'],
     ),
   ];
 

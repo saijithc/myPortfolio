@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 import '../../constants/app_constants.dart';
 import '../../constants/app_theme.dart';
 import '../../widgets/typing_animation.dart';
 import '../../utils/text_utils.dart';
+import '../../view_models/portfolio_view_model.dart';
 
 class HeaderSection extends StatelessWidget {
   final ScrollController scrollController;
@@ -210,50 +212,48 @@ class HeaderSection extends StatelessWidget {
   }
 
   void _scrollToSection(BuildContext context, String sectionName) {
-    // Calculate approximate scroll positions for each section
-    double targetOffset = 0;
-    final screenHeight = MediaQuery.of(context).size.height;
-    
+    final viewModel = Provider.of<PortfolioViewModel>(context, listen: false);
+
+    BuildContext? targetContext;
     switch (sectionName.toLowerCase()) {
       case 'home':
-        targetOffset = 0;
+        targetContext = viewModel.headerKey.currentContext;
         break;
       case 'about me':
-        targetOffset = screenHeight * 0.8; // Header section height
-             case 'achievements':
-        targetOffset = screenHeight * 1.5;
-        
+        targetContext = viewModel.aboutKey.currentContext;
+        break;
+      case 'achievements':
+        targetContext = viewModel.achievementsKey.currentContext ?? viewModel.whyHireKey.currentContext ?? viewModel.headerKey.currentContext;
         break;
       case 'skills':
-        targetOffset = screenHeight * 2.2; // Header + About sections
+        targetContext = viewModel.skillsKey.currentContext;
         break;
       case 'services':
-        targetOffset = screenHeight * 3.5; // Header + About + Skills sections
+        targetContext = viewModel.servicesKey.currentContext;
         break;
       case 'experience':
-        targetOffset = screenHeight * 5.0; // Previous sections
+        targetContext = viewModel.experienceKey.currentContext;
         break;
       case 'projects':
-        targetOffset = screenHeight * 6.5; // Previous sections
-        break;
       case 'case studies':
-        targetOffset = screenHeight * 6.5; // Same as projects
+        targetContext = viewModel.projectsKey.currentContext;
         break;
       case 'pricing':
-        targetOffset = screenHeight * 8.0; // Previous sections
+        targetContext = viewModel.pricingKey.currentContext;
         break;
       case 'contact':
-        targetOffset = screenHeight * 0.8; // Previous sections
+        targetContext = viewModel.contactKey.currentContext;
         break;
-      default:
-        targetOffset = 0;
     }
-    
-    scrollController.animateTo(
-      targetOffset,
-      duration: const Duration(milliseconds: 1000),
-      curve: Curves.easeInOut,
-    );
+
+    if (targetContext != null) {
+      Scrollable.ensureVisible(
+        targetContext,
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.easeInOut,
+        alignment: 0.1,
+      );
+    }
   }
 
   void _openLinkedIn(BuildContext context) async {

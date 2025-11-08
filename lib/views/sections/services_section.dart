@@ -76,7 +76,7 @@ class ServicesSection extends StatelessWidget {
           crossAxisCount: isTablet ? 2 : 3,
           crossAxisSpacing: 24,
           mainAxisSpacing: 24,
-          childAspectRatio: 0.9, // Reduced aspect ratio to accommodate content
+          childAspectRatio: 1.18, // Increased aspect ratio to reduce card height
         ),
         itemCount: services.length,
         itemBuilder: (context, index) {
@@ -161,22 +161,22 @@ class ServicesSection extends StatelessWidget {
           const SizedBox(height: 20),
           
           // Learn More Button
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppTheme.neonGreen.withOpacity(0.3),
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: textSemiBoldDefault(
-              text: 'Learn More',
-              color: AppTheme.neonGreen,
-              textAlign: TextAlign.center,
-            ),
-          ),
+          // Container(
+          //   width: double.infinity,
+          //   padding: const EdgeInsets.symmetric(vertical: 12),
+          //   decoration: BoxDecoration(
+          //     border: Border.all(
+          //       color: AppTheme.neonGreen.withOpacity(0.3),
+          //       width: 1,
+          //     ),
+          //     borderRadius: BorderRadius.circular(8),
+          //   ),
+          //   child: textSemiBoldDefault(
+          //     text: 'Learn More',
+          //     color: AppTheme.neonGreen,
+          //     textAlign: TextAlign.center,
+          //   ),
+          // ),
         ],
       ),
     );
