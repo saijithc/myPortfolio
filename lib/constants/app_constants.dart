@@ -25,7 +25,7 @@ class AppConstants {
   static const List<String> navigationItems = [
     'Home',
     'About Me',
-    'Achievements',
+    // 'Achievements',
     'Skills',
     'Services',
     'Experience'
@@ -76,7 +76,7 @@ class AppConstants {
     Service(
       title: 'API Integrations',
       description: 'RESTful services, third-party APIs',
-      icon: '🔌',
+      icon: '🔗',
       features: ['REST APIs', 'Third-party Services', 'Data Management', 'Error Handling'],
     ),
     Service(
@@ -102,10 +102,15 @@ class AppConstants {
       isCurrent: true,
       technologies: ['Flutter', 'Dart', 'Firebase', 'REST APIs', 'MVVM'],
       responsibilities: [
-        'Spearheaded SalesGo 3.0 with 2FA, geofencing, voice-to-text, push notifications',
+        'Spearheaded SalesGo 3.0 with 2FA, geofencing, voice-to-text, push notifications, Digicard integration',
         'Maintained SalesGo 2.1 CRM',
         'Built SalesGo Bandhan Visits 3.0 (Flutter)',
-        'Developed SalesGo Leads with LinkedIn integration',
+        'Developed SalesGo Leads with LinkedIn integration', 
+        'Developed MIS dashboard to track KPIs,generate reports, create campaigns etc',
+        'Owned VAPT fixes and security hardening across apps',
+        'Managed App Store and Play Store releases (internal, beta, production)',
+        'Implemented Firebase Crashlytics and Analytics for proactive monitoring, user insights, and reducing production crashes',
+       
       ],
     ),
     Experience(
@@ -125,54 +130,44 @@ class AppConstants {
 
   static const List<Project> projects = [
     Project(
-      title: 'Groomly – Salon Booking App',
-      description: 'Dark theme salon booking app with comprehensive features',
-      longDescription: 'A modern salon booking application featuring dark theme design, advanced booking system, stylist selection, and integrated payment processing. The app was fully designed in Figma before development.',
-      technologies: ['Flutter', 'Dart', 'Firebase', 'Payment Gateway', 'MVVM'],
-      imageUrl: 'assets/images/projects/groomly.png',
-      githubUrl: 'https://github.com/saijithc/groomly',
+      title: 'SalesGO Leads',
+      description: 'Complete frontend implementation for SalesGO Leads using Flutter & Dart',
+      longDescription: 'Built the entire frontend for SalesGO Leads, translating UI/UX into scalable Flutter components with high performance and responsiveness. Contributed directly to onboarding 2 new clients.',
+      technologies: ['Flutter', 'Dart', 'MVVM', 'Provider', 'Firebase', 'REST APIs','CI/CD','LinkedIn Integration','Push Notifications'],
+      imageUrl: 'assets/images/salesgo_leads_ios.png',
       liveUrl: null,
+      androidUrl: 'https://play.google.com/store/apps/details?id=com.salesgo.salesgoleads30.salesgo_leads_30',
+      iosUrl: 'https://apps.apple.com/in/app/salesgo-leads/id6744051351', // replace with real App Store ID
+      webUrl: 'https://leadsuat.salesgo.com', // replace with real web URL
       features: [
-        'Dark theme design',
-        'Advanced booking system',
-        'Stylist selection',
-        'Payment integration',
-        'User authentication',
-        'Real-time updates',
+        'Implemented the complete frontend for the SalesGO Leads product using Flutter and Dart, translating UI/UX designs into scalable, high-performance interfaces and contributing to the successful onboarding of 2 new clients.',
+        'Collaborated closely with UI/UX designers, product managers, and backend teams to convert wireframes, prototypes, and feature concepts into production-ready Flutter components following industry best practices.',
+        'Worked with product managers to understand problem statements and business goals, and implemented frontend solutions that aligned with user needs, scalability, and maintainability.',
+        'Ensured MVVM architecture and maintainable code by following Flutter best practices, including reusable widgets, modular structure, and optimized state management.',
+        'Strengthened ownership across the frontend lifecycle, from feature implementation and refinement to client demos and production releases.',
       ],
     ),
     Project(
-      title: 'Music Pill – Offline Music Player',
-      description: 'Feature-rich offline music player with modern UI',
-      longDescription: 'A comprehensive offline music player built with Flutter featuring MVVM architecture, local storage with Hive, and GetX state management. Includes playlists, favorites, and a mini-player.',
-      technologies: ['Flutter', 'Dart', 'Hive', 'GetX', 'MVVM'],
-      imageUrl: 'assets/images/projects/music_pill.png',
-      githubUrl: 'https://github.com/saijithc/music-pill',
+      title: 'SalesGO Visits',
+      description: 'Feature development and enhancements for SalesGO Visits',
+      longDescription: 'Developed and enhanced major features in SalesGO Visits, improving usability, performance, and adoption. Helped enable onboarding of 4 new enterprise clients.',
+      technologies: ['Flutter', 'Dart', 'MVVM', 'Riverpod', 'REST APIs', 'Firebase','CI/CD','Geofencing','Voice-to-text','Push Notifications'],
+      imageUrl: 'assets/images/salesgo_visits_ios.png',
       liveUrl: null,
+      androidUrl: 'https://play.google.com/store/apps/details?id=in.nodetech.salesgo3',
+      iosUrl: 'https://apps.apple.com/in/app/salesgo-visits/id1622332742', // replace with real App Store ID
+      webUrl: 'https://web30.salesgo.com/', // replace with real web URL
       features: [
-        'Offline music playback',
-        'Playlist management',
-        'Favorites system',
-        'Mini-player interface',
-        'Local storage',
-        'Modern UI design',
-      ],
-    ),
-    Project(
-      title: 'Tailus – Social Media App',
-      description: 'Full-featured social media platform with real-time communication',
-      longDescription: 'A comprehensive social media application featuring multiple authentication methods, real-time chat, voice/video calls, posts, stories, and push notifications.',
-      technologies: ['Flutter', 'Dart', 'Firebase', 'WebRTC', 'Provider'],
-      imageUrl: 'assets/images/projects/tailus.png',
-      githubUrl: 'https://github.com/saijithc/tailus',
-      liveUrl: null,
-      features: [
-        'Multiple authentication methods',
-        'Real-time chat',
-        'Voice/video calls',
-        'Posts and stories',
-        'Push notifications',
-        'Social interactions',
+        'Implemented geofencing-based check-in/out and visit scheduling for field teams',
+        'Added voice-to-text notes and media attachments to streamline visit reporting',
+        'Integrated push notifications for visit reminders',
+        'Added DigiCard integration enabling logged-in users to share profile via QR code, WhatsApp, email, or LinkedIn',
+        'Actively participated in feature discussions driven by client feedback, implementing refined user flows, responsive layouts, and interaction patterns that improved overall product experience.',
+        'Worked with product managers to understand problem statements and business goals, and implemented frontend solutions that aligned with user needs, scalability, and maintainability.',
+        'Ensured MVVM architecture and maintainable code by following Flutter best practices, including reusable widgets, modular structure, and optimized state management.',
+        'Strengthened ownership across the frontend lifecycle, from feature implementation and refinement to client demos and production releases.',
+        'Implemented Firebase Crashlytics and Analytics for proactive monitoring, user insights, and reducing production crashes',
+       
       ],
     ),
   ];

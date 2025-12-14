@@ -111,9 +111,11 @@ class _ScrollTriggeredLoadingWidgetState extends State<ScrollTriggeredLoadingWid
       builder: (context, child) {
         return Stack(
           children: [
-            // Blurred background with gradient mask
+            // Blurred background with gradient mask (does not block input)
             if (!_isLoaded)
-              Container(
+              IgnorePointer(
+                ignoring: true,
+                child: Container(
                 width: double.infinity,
                 height: 300,
                 decoration: BoxDecoration(
@@ -246,6 +248,7 @@ class _ScrollTriggeredLoadingWidgetState extends State<ScrollTriggeredLoadingWid
                       ),
                     ),
                   ),
+                ),
                 ),
               ),
             

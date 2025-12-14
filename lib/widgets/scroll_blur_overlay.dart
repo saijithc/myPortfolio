@@ -132,54 +132,57 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
             top: 0,
             left: 0,
             right: 0,
-            child: AnimatedBuilder(
-              animation: _blurAnimation,
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _blurAnimation.value,
-                  child: Container(
-                    height: widget.blurHeight,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.black.withValues(alpha: 0.95),
-                          Colors.black.withValues(alpha: 0.8),
-                          Colors.black.withValues(alpha: 0.5),
-                          Colors.black.withValues(alpha: 0.2),
-                          Colors.transparent,
-                        ],
-                        stops: const [0.0, 0.3, 0.6, 0.8, 1.0],
-                      ),
-                    ),
-                    child: ClipRect(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaX: 25.0 * _blurAnimation.value,
-                          sigmaY: 25.0 * _blurAnimation.value,
+            child: IgnorePointer(
+              ignoring: true,
+              child: AnimatedBuilder(
+                animation: _blurAnimation,
+                builder: (context, child) {
+                  return Opacity(
+                    opacity: _blurAnimation.value,
+                    child: Container(
+                      height: widget.blurHeight,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.black.withValues(alpha: 0.95),
+                            Colors.black.withValues(alpha: 0.8),
+                            Colors.black.withValues(alpha: 0.5),
+                            Colors.black.withValues(alpha: 0.2),
+                            Colors.transparent,
+                          ],
+                          stops: const [0.0, 0.3, 0.6, 0.8, 1.0],
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
-                                Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
-                                Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
-                                Colors.transparent,
-                                Colors.transparent,
-                              ],
-                              stops: const [0.0, 0.4, 0.7, 0.9, 1.0],
+                      ),
+                      child: ClipRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(
+                            sigmaX: 25.0 * _blurAnimation.value,
+                            sigmaY: 25.0 * _blurAnimation.value,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
+                                  Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
+                                  Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                ],
+                                stops: const [0.0, 0.4, 0.7, 0.9, 1.0],
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         
@@ -189,54 +192,57 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
             bottom: 0,
             left: 0,
             right: 0,
-            child: AnimatedBuilder(
-              animation: _blurAnimation,
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _blurAnimation.value,
-                  child: Container(
-                    height: widget.blurHeight,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                           Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
-                                Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
-                                Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
-                                Colors.transparent,
-                                Colors.transparent,
-                        ],
-                         stops: const [0.0, 0.4, 0.7, 0.9, 1.0],
-                      ),
-                    ),
-                    child: ClipRect(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaX: 25.0 * _blurAnimation.value,
-                          sigmaY: 25.0 * _blurAnimation.value,
+            child: IgnorePointer(
+              ignoring: true,
+              child: AnimatedBuilder(
+                animation: _blurAnimation,
+                builder: (context, child) {
+                  return Opacity(
+                    opacity: _blurAnimation.value,
+                    child: Container(
+                      height: widget.blurHeight,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                             Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
+                                  Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
+                                  Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
+                                  Colors.black.withValues(alpha: 0.05 * _blurAnimation.value),
+                                  Colors.transparent,
+                          ],
+                           stops: const [0.0, 0.4, 0.7, 0.9, 1.0],
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [
-                                Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
-                                Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
-                                Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
-                                Colors.black.withValues(alpha: 0.05 * _blurAnimation.value),
-                                Colors.transparent,
-                              ],
-                              stops: const [0.0, 0.4, 0.7, 0.9, 1.0],
+                      ),
+                      child: ClipRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(
+                            sigmaX: 25.0 * _blurAnimation.value,
+                            sigmaY: 25.0 * _blurAnimation.value,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
+                                  Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
+                                  Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
+                                  Colors.black.withValues(alpha: 0.05 * _blurAnimation.value),
+                                  Colors.transparent,
+                                ],
+                                stops: const [0.0, 0.4, 0.7, 0.9, 1.0],
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
       ],

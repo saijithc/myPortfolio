@@ -140,7 +140,7 @@ class HeaderSection extends StatelessWidget {
                     _buildCTAButton(
                       context,
                       'Hire Me',
-                      () => _scrollToSection(context, 'Contact'),
+                      () => _openEmailHireMe(),
                       isPrimary: true,
                     ),
                     const SizedBox(height: 16),
@@ -157,7 +157,7 @@ class HeaderSection extends StatelessWidget {
                         _buildCTAButton(
                           context,
                           'Hire Me',
-                          () => _scrollToSection(context, 'Contact'),
+                        () => _openEmailHireMe(),
                           isPrimary: true,
                         ),
                         const SizedBox(width: 20),
@@ -260,6 +260,20 @@ class HeaderSection extends StatelessWidget {
     final url = Uri.parse('https://${AppConstants.contactInfo.linkedin}');
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
+    }
+  }
+
+  void _openEmailHireMe() async {
+    final email = 'saijith053@gmail.com';
+    final subject = 'Interested in hiring you';
+    final body = 'Hi Saijith,\n\nI came across your portfolio and would like to discuss an opportunity.\n\nThanks,\n';
+    final uri = Uri(
+      scheme: 'mailto',
+      path: email,
+      query: 'subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}',
+    );
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
     }
   }
 

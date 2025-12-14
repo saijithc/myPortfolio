@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 import '../../constants/app_constants.dart';
 import '../../constants/app_theme.dart';
 import '../../utils/text_utils.dart';
+import '../../view_models/portfolio_view_model.dart';
 
 class FooterSection extends StatelessWidget {
   const FooterSection({super.key});
@@ -246,8 +248,50 @@ class FooterSection extends StatelessWidget {
 
 
   void _scrollToSection(BuildContext context, String sectionName) {
-    // This will be implemented with scroll controllers
-    debugPrint('Scrolling to: $sectionName');
+    final viewModel = context.read<PortfolioViewModel>();
+    GlobalKey? targetKey;
+    switch (sectionName) {
+      case 'Home':
+        targetKey = viewModel.headerKey;
+        break;
+      case 'About Me':
+        targetKey = viewModel.aboutKey;
+        break;
+      case 'Achievements':
+        targetKey = viewModel.achievementsKey;
+        break;
+      case 'Skills':
+        targetKey = viewModel.skillsKey;
+        break;
+      case 'Services':
+        targetKey = viewModel.servicesKey;
+        break;
+      case 'Experience':
+        targetKey = viewModel.experienceKey;
+        break;
+      default:
+        targetKey = viewModel.headerKey;
+        break;
+    }
+
+    final targetContext = targetKey.currentContext;
+    if (targetContext == null) return;
+    // Defer to next frame and ensure the render object is still attached before scrolling
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final renderObject = targetContext.findRenderObject();
+      if (renderObject != null && renderObject.attached) {
+        try {
+          Scrollable.ensureVisible(
+            targetContext,
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeInOutCubic,
+            alignment: 0.05,
+          );
+        } catch (_) {
+          // No-op: target might have been disposed in the meantime (e.g., hot reload)
+        }
+      }
+    });
   }
 
   void _launchEmail(String email) async {

@@ -4,8 +4,11 @@ class Project {
   final String longDescription;
   final List<String> technologies;
   final String imageUrl;
-  final String githubUrl;
+  final String? githubUrl;
   final String? liveUrl;
+  final String? androidUrl;
+  final String? iosUrl;
+  final String? webUrl;
   final List<String> features;
 
   const Project({
@@ -14,8 +17,11 @@ class Project {
     required this.longDescription,
     required this.technologies,
     required this.imageUrl,
-    required this.githubUrl,
+    this.githubUrl,
     this.liveUrl,
+    this.androidUrl,
+    this.iosUrl,
+    this.webUrl,
     required this.features,
   });
 }

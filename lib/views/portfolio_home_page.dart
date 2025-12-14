@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../view_models/portfolio_view_model.dart';
 import '../widgets/scroll_triggered_loading_widget.dart';
-import '../widgets/scroll_blur_overlay.dart';
 import 'sections/header_section.dart';
 import 'sections/about_section.dart';
 import 'sections/skills_section.dart';
@@ -11,6 +10,7 @@ import 'sections/experience_section.dart';
 import 'sections/projects_section.dart';
 import 'sections/why_hire_section.dart';
 import 'sections/footer_section.dart';
+import '../widgets/scroll_transition_effect.dart';
 
 class PortfolioHomePage extends StatelessWidget {
   const PortfolioHomePage({super.key});
@@ -21,9 +21,7 @@ class PortfolioHomePage extends StatelessWidget {
       builder: (context, viewModel, child) {
         return Scaffold(
           key: viewModel.scaffoldKey,
-          body: ScrollBlurOverlay(
-            scrollController: viewModel.scrollController,
-            child: Container(
+          body: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -42,7 +40,6 @@ class PortfolioHomePage extends StatelessWidget {
                   ScrollTriggeredLoadingWidget(
                     key: viewModel.headerKey,
                     child: HeaderSection(
-                      key: viewModel.headerKey,
                       scrollController: viewModel.scrollController,
                     ),
                   ),
@@ -101,7 +98,6 @@ class PortfolioHomePage extends StatelessWidget {
                   ),
                   ],
                 ),
-              ),
             ),
           ),
         );

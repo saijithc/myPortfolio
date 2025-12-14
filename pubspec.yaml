@@ -48,6 +48,8 @@ dependencies:
   # Utilities
   url_launcher: ^6.2.5
   flutter_svg: ^2.0.10+1
+  circular_rotation: ^0.0.2
+  hyper_effects: ^0.3.0+1
   
   # Fonts
   google_fonts: ^6.2.1
