@@ -93,28 +93,29 @@ class ServicesSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Service Icon
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: AppTheme.neonGreen.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: AppTheme.neonGreen.withOpacity(0.3),
-                width: 1,
+          // Optional icon (hidden if not provided to avoid font issues on web)
+          if ((service.icon as String).trim().isNotEmpty) ...[
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: AppTheme.neonGreen.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: AppTheme.neonGreen.withOpacity(0.3),
+                  width: 1,
+                ),
+              ),
+              child: Center(
+                child: textCustom(
+                  text: service.icon,
+                  color: AppTheme.neonGreen,
+                  fontSize: 28,
+                ),
               ),
             ),
-            child: Center(
-              child: textCustom(
-                text: service.icon,
-                color: AppTheme.neonGreen,
-                fontSize: 28,
-              ),
-            ),
-          ),
-          
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
+          ],
           
           // Service Title
           textBoldDefault(

@@ -214,46 +214,54 @@ class HeaderSection extends StatelessWidget {
   void _scrollToSection(BuildContext context, String sectionName) {
     final viewModel = Provider.of<PortfolioViewModel>(context, listen: false);
 
-    BuildContext? targetContext;
+    GlobalKey? key;
     switch (sectionName.toLowerCase()) {
       case 'home':
-        targetContext = viewModel.headerKey.currentContext;
+        key = viewModel.headerKey;
         break;
       case 'about me':
-        targetContext = viewModel.aboutKey.currentContext;
+        key = viewModel.aboutKey;
         break;
       case 'achievements':
-        targetContext = viewModel.achievementsKey.currentContext ?? viewModel.whyHireKey.currentContext ?? viewModel.headerKey.currentContext;
+        key = viewModel.achievementsKey;
         break;
       case 'skills':
-        targetContext = viewModel.skillsKey.currentContext;
+        key = viewModel.skillsKey;
         break;
       case 'services':
-        targetContext = viewModel.servicesKey.currentContext;
+        key = viewModel.servicesKey;
         break;
       case 'experience':
-        targetContext = viewModel.experienceKey.currentContext;
+        key = viewModel.experienceKey;
         break;
       case 'projects':
       case 'case studies':
-        targetContext = viewModel.projectsKey.currentContext;
+        key = viewModel.projectsKey;
         break;
       case 'pricing':
-        targetContext = viewModel.pricingKey.currentContext;
+        key = viewModel.pricingKey;
         break;
       case 'contact':
-        targetContext = viewModel.contactKey.currentContext;
+        key = viewModel.contactKey;
         break;
     }
 
-    if (targetContext != null) {
-      Scrollable.ensureVisible(
-        targetContext,
-        duration: const Duration(milliseconds: 1000),
-        curve: Curves.easeInOut,
-        alignment: 0.1,
-      );
-    }
+    final targetContext = key?.currentContext;
+    if (targetContext == null) return;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final renderObject = targetContext.findRenderObject();
+      if (renderObject != null && renderObject.attached) {
+        try {
+          Scrollable.ensureVisible(
+            targetContext,
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeInOutCubic,
+            alignment: 0.08,
+          );
+        } catch (_) {}
+      }
+    });
   }
 
   void _openLinkedIn(BuildContext context) async {
