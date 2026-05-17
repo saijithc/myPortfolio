@@ -14,5 +14,3 @@ Future<bool> openUrl(String url, {String? webTarget}) async {
   } catch (_) {}
   return false;
 }
-
-

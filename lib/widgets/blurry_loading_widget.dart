@@ -34,42 +34,35 @@ class _BlurryLoadingWidgetState extends State<BlurryLoadingWidget>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
+    _controller = AnimationController(duration: widget.duration, vsync: this);
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.5, 1.0, curve: Curves.easeOutCubic),
+      ),
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.5, 1.0, curve: Curves.easeOutCubic),
-    ));
+    _blurAnimation = Tween<double>(begin: widget.blurRadius, end: 0.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
+      ),
+    );
 
-    _blurAnimation = Tween<double>(
-      begin: widget.blurRadius,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
-    ));
+    _slideAnimation = Tween<double>(begin: 80.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.3, 1.0, curve: Curves.easeOutCubic),
+      ),
+    );
 
-    _slideAnimation = Tween<double>(
-      begin: 80.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.3, 1.0, curve: Curves.easeOutCubic),
-    ));
-
-    _scaleAnimation = Tween<double>(
-      begin: 0.9,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.9, curve: Curves.easeOutCubic),
-    ));
+    _scaleAnimation = Tween<double>(begin: 0.9, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.9, curve: Curves.easeOutCubic),
+      ),
+    );
 
     // Start animation after delay
     Future.delayed(widget.delay, () {
@@ -146,8 +139,14 @@ class _BlurryLoadingWidgetState extends State<BlurryLoadingWidget>
                                 return Container(
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
-                                      begin: Alignment(-1.5 + _controller.value * 3, 0.0),
-                                      end: Alignment(1.5 + _controller.value * 3, 0.0),
+                                      begin: Alignment(
+                                        -1.5 + _controller.value * 3,
+                                        0.0,
+                                      ),
+                                      end: Alignment(
+                                        1.5 + _controller.value * 3,
+                                        0.0,
+                                      ),
                                       colors: [
                                         Colors.transparent,
                                         Colors.white.withValues(alpha: 0.3),
@@ -173,12 +172,16 @@ class _BlurryLoadingWidgetState extends State<BlurryLoadingWidget>
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: Colors.white.withValues(alpha: 0.4),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.4,
+                                      ),
                                       width: 3,
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.white.withValues(alpha: 0.2),
+                                        color: Colors.white.withValues(
+                                          alpha: 0.2,
+                                        ),
                                         blurRadius: 10,
                                         spreadRadius: 2,
                                       ),
@@ -200,7 +203,9 @@ class _BlurryLoadingWidgetState extends State<BlurryLoadingWidget>
                                     borderRadius: BorderRadius.circular(3),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.white.withValues(alpha: 0.1),
+                                        color: Colors.white.withValues(
+                                          alpha: 0.1,
+                                        ),
                                         blurRadius: 5,
                                       ),
                                     ],
@@ -211,9 +216,12 @@ class _BlurryLoadingWidgetState extends State<BlurryLoadingWidget>
                                       return LinearProgressIndicator(
                                         value: _controller.value,
                                         backgroundColor: Colors.transparent,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.white.withValues(alpha: 0.7),
-                                        ),
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                              Colors.white.withValues(
+                                                alpha: 0.7,
+                                              ),
+                                            ),
                                       );
                                     },
                                   ),
@@ -232,7 +240,7 @@ class _BlurryLoadingWidgetState extends State<BlurryLoadingWidget>
                   ),
                 ),
               ),
-            
+
             // Actual content with slide and scale animation
             Transform.translate(
               offset: Offset(_slideAnimation.value, 0),

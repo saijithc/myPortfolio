@@ -7,5 +7,3 @@ class UrlOpener {
     return openUrl(url, webTarget: webTarget);
   }
 }
-
-

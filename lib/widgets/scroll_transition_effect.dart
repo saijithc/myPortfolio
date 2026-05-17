@@ -42,12 +42,18 @@ class _ScrollTransitionEffectState extends State<ScrollTransitionEffect>
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: widget.duration);
-    _opacity = Tween<double>(begin: widget.beginOpacity, end: widget.endOpacity)
-        .animate(CurvedAnimation(parent: _controller, curve: widget.curve));
-    _scale = Tween<double>(begin: widget.beginScale, end: widget.endScale)
-        .animate(CurvedAnimation(parent: _controller, curve: widget.curve));
-    _offset = Tween<Offset>(begin: widget.beginOffset, end: widget.endOffset)
-        .animate(CurvedAnimation(parent: _controller, curve: widget.curve));
+    _opacity = Tween<double>(
+      begin: widget.beginOpacity,
+      end: widget.endOpacity,
+    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
+    _scale = Tween<double>(
+      begin: widget.beginScale,
+      end: widget.endScale,
+    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
+    _offset = Tween<Offset>(
+      begin: widget.beginOffset,
+      end: widget.endOffset,
+    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
     WidgetsBinding.instance.addPostFrameCallback((_) => _checkAndTrigger());
     widget.controller.addListener(_onScroll);
   }
@@ -74,7 +80,8 @@ class _ScrollTransitionEffectState extends State<ScrollTransitionEffect>
     final screenHeight = MediaQuery.of(context).size.height;
     // Trigger when top enters viewport with small preload
     final preload = 120.0;
-    final entersViewport = position.dy < screenHeight - preload && position.dy + size.height > 0;
+    final entersViewport =
+        position.dy < screenHeight - preload && position.dy + size.height > 0;
     if (entersViewport && !_triggered) {
       _triggered = true;
       _controller.forward();
@@ -90,10 +97,7 @@ class _ScrollTransitionEffectState extends State<ScrollTransitionEffect>
           opacity: _opacity.value,
           child: Transform.translate(
             offset: _offset.value,
-            child: Transform.scale(
-              scale: _scale.value,
-              child: child,
-            ),
+            child: Transform.scale(scale: _scale.value, child: child),
           ),
         );
       },
@@ -101,5 +105,3 @@ class _ScrollTransitionEffectState extends State<ScrollTransitionEffect>
     );
   }
 }
-
-

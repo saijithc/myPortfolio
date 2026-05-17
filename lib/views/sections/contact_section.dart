@@ -19,30 +19,30 @@ class ContactSection extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : 40,
-        vertical: 80,
+        vertical: isMobile ? 40 : 80,
       ),
       child: Column(
         children: [
           // Section Title
           textCustom(
             text: 'Get In Touch',
-            color: AppTheme.textPrimary,
+            color: context.theme.textPrimary,
             fontSize: isMobile ? 24 : 32,
             fontWeight: FontWeight.bold,
             textAlign: TextAlign.center,
           ),
-          
+
           const SizedBox(height: 20),
-          
+
           // Section Subtitle
           textSemiBoldLarge(
             text: 'Let\'s discuss your project',
-            color: AppTheme.neonGreen,
+            color: context.theme.neonGreen,
             textAlign: TextAlign.center,
           ),
-          
+
           const SizedBox(height: 60),
-          
+
           // Contact Content
           if (isMobile) ...[
             _buildMobileContactLayout(context),
@@ -51,18 +51,12 @@ class ContactSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Contact Info
-                Expanded(
-                  flex: 1,
-                  child: _buildContactInfo(context),
-                ),
-                
+                Expanded(flex: 1, child: _buildContactInfo(context)),
+
                 const SizedBox(width: 60),
-                
+
                 // Contact Form
-                Expanded(
-                  flex: 2,
-                  child: _buildContactForm(context),
-                ),
+                Expanded(flex: 2, child: _buildContactForm(context)),
               ],
             ),
           ],
@@ -83,7 +77,7 @@ class ContactSection extends StatelessWidget {
 
   Widget _buildContactInfo(BuildContext context) {
     final contactInfo = AppConstants.contactInfo;
-    
+
     return GlowCard(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -91,62 +85,63 @@ class ContactSection extends StatelessWidget {
         children: [
           textBoldDefault(
             text: 'Contact Information',
-            color: AppTheme.textPrimary,
+            color: context.theme.textPrimary,
           ),
-          
+
           const SizedBox(height: 24),
-          
-          _buildContactItem(
-            Icons.person,
-            'Name',
-            contactInfo.name,
-          ),
-          
+
+          _buildContactItem(context, Icons.person, 'Name', contactInfo.name),
+
           const SizedBox(height: 20),
-          
+
           _buildContactItem(
+            context,
             Icons.email,
             'Email',
             contactInfo.email,
             onTap: () => _launchEmail(contactInfo.email),
           ),
-          
+
           const SizedBox(height: 20),
-          
+
           _buildContactItem(
+            context,
             Icons.phone,
             'Phone',
             contactInfo.phone,
             onTap: () => _launchPhone(contactInfo.phone),
           ),
-          
+
           const SizedBox(height: 20),
-          
+
           _buildContactItem(
+            context,
             Icons.location_on,
             'Location',
             contactInfo.location,
           ),
-          
+
           const SizedBox(height: 32),
-          
+
           // Social Links
           textSemiBoldLarge(
             text: 'Connect with me',
-            color: AppTheme.textPrimary,
+            color: context.theme.textPrimary,
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           Row(
             children: [
               _buildSocialButton(
+                context,
                 'GitHub',
                 Icons.code,
                 () => _launchUrl('https://${contactInfo.github}'),
               ),
               const SizedBox(width: 16),
               _buildSocialButton(
+                context,
                 'LinkedIn',
                 Icons.work,
                 () => _launchUrl('https://${contactInfo.linkedin}'),
@@ -159,6 +154,7 @@ class ContactSection extends StatelessWidget {
   }
 
   Widget _buildContactItem(
+    BuildContext context,
     IconData icon,
     String label,
     String value, {
@@ -171,11 +167,7 @@ class ContactSection extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: AppTheme.neonGreen,
-              size: 20,
-            ),
+            Icon(icon, color: context.theme.neonGreen, size: 20),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -183,30 +175,33 @@ class ContactSection extends StatelessWidget {
                 children: [
                   textRegularSmall(
                     text: label,
-                    color: AppTheme.textTertiary,
+                    color: context.theme.textTertiary,
                   ),
                   const SizedBox(height: 4),
                   textCustom(
                     text: value,
-                    color: AppTheme.textPrimary,
-                    fontWeight: onTap != null ? FontWeight.w500 : FontWeight.normal,
+                    color: context.theme.textPrimary,
+                    fontWeight: onTap != null
+                        ? FontWeight.w500
+                        : FontWeight.normal,
                   ),
                 ],
               ),
             ),
             if (onTap != null)
-              const Icon(
-                Icons.open_in_new,
-                color: AppTheme.neonGreen,
-                size: 18,
-              ),
+              Icon(Icons.open_in_new, color: context.theme.neonGreen, size: 18),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSocialButton(String label, IconData icon, VoidCallback onTap) {
+  Widget _buildSocialButton(
+    BuildContext context,
+    String label,
+    IconData icon,
+    VoidCallback onTap,
+  ) {
     return Expanded(
       child: InkWell(
         onTap: onTap,
@@ -214,20 +209,18 @@ class ContactSection extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
-            border: Border.all(color: AppTheme.neonGreen.withOpacity(0.3)),
+            border: Border.all(
+              color: context.theme.neonGreen.withValues(alpha: 0.3),
+            ),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
             children: [
-              Icon(
-                icon,
-                color: AppTheme.neonGreen,
-                size: 24,
-              ),
+              Icon(icon, color: context.theme.neonGreen, size: 24),
               const SizedBox(height: 8),
               textMediumDefault(
                 text: label,
-                color: AppTheme.neonGreen,
+                color: context.theme.neonGreen,
                 textAlign: TextAlign.center,
               ),
             ],
@@ -249,11 +242,11 @@ class ContactSection extends StatelessWidget {
               children: [
                 textBoldDefault(
                   text: 'Send me a message',
-                  color: AppTheme.textPrimary,
+                  color: context.theme.textPrimary,
                 ),
-                
+
                 const SizedBox(height: 24),
-                
+
                 // Name Field
                 TextFormField(
                   controller: viewModel.nameController,
@@ -263,9 +256,9 @@ class ContactSection extends StatelessWidget {
                     hintText: 'Enter your full name',
                   ),
                 ),
-                
+
                 const SizedBox(height: 20),
-                
+
                 // Email Field
                 TextFormField(
                   controller: viewModel.emailController,
@@ -276,9 +269,9 @@ class ContactSection extends StatelessWidget {
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
-                
+
                 const SizedBox(height: 20),
-                
+
                 // Message Field
                 TextFormField(
                   controller: viewModel.messageController,
@@ -289,36 +282,36 @@ class ContactSection extends StatelessWidget {
                   ),
                   maxLines: 5,
                 ),
-                
+
                 const SizedBox(height: 24),
-                
+
                 // Submit Button
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: viewModel.isSubmittingContact 
-                        ? null 
+                    onPressed: viewModel.isSubmittingContact
+                        ? null
                         : viewModel.submitContactForm,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.neonGreen,
-                      foregroundColor: AppTheme.primaryDark,
+                      backgroundColor: context.theme.neonGreen,
+                      foregroundColor: context.theme.primaryDark,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     child: viewModel.isSubmittingContact
-                        ? const SizedBox(
+                        ? SizedBox(
                             width: 20,
                             height: 20,
                             child: CircularProgressIndicator(
-                              color: AppTheme.primaryDark,
+                              color: context.theme.primaryDark,
                               strokeWidth: 2,
                             ),
                           )
                         : textBoldDefault(
                             text: 'Send Message',
-                            color: AppTheme.primaryDark,
+                            color: context.theme.primaryDark,
                           ),
                   ),
                 ),

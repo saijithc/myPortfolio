@@ -27,17 +27,11 @@ class _AnimatedCounterState extends State<AnimatedCounter>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
     _animation = IntTween(
       begin: 0,
       end: widget.value,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutCubic,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
 
     _animation.addListener(() {
       setState(() {
@@ -64,7 +58,9 @@ class _AnimatedCounterState extends State<AnimatedCounter>
             ? [
                 TextSpan(
                   text: widget.suffix,
-                  style: widget.textStyle ?? Theme.of(context).textTheme.headlineMedium,
+                  style:
+                      widget.textStyle ??
+                      Theme.of(context).textTheme.headlineMedium,
                 ),
               ]
             : null,

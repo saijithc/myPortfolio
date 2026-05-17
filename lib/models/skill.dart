@@ -6,7 +6,7 @@ class Skill {
   final bool? shouldAddColor;
   final String? learnMoreUrl;
 
-   Skill({
+  Skill({
     required this.name,
     required this.category,
     required this.proficiency,

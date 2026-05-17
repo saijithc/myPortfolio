@@ -11,7 +11,7 @@ import '../../utils/text_utils.dart';
 
 class SkillsSection extends StatefulWidget {
   const SkillsSection({super.key});
-  
+
   @override
   State<SkillsSection> createState() => _SkillsSectionState();
 }
@@ -45,7 +45,11 @@ class _SkillsSectionState extends State<SkillsSection>
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 20 : isTablet ? 60 : 80,
+        horizontal: isMobile
+            ? 20
+            : isTablet
+            ? 60
+            : 80,
         vertical: isMobile ? 60 : 100,
       ),
       child: ConstrainedBox(
@@ -54,32 +58,44 @@ class _SkillsSectionState extends State<SkillsSection>
         ),
         child: Column(
           children: [
-          // Section Title
-          textCustom(
-            text: 'Skills & Expertise',
-            color: AppTheme.textPrimary,
-            fontSize: isMobile ? 24 : 32,
-            fontWeight: FontWeight.bold,
-            textAlign: TextAlign.center,
-          ),
-          
-          const SizedBox(height: 20),
-          
-          // Section Subtitle
-          textSemiBoldLarge(
-            text: 'Technologies I work with',
-            color: AppTheme.neonGreen,
-            textAlign: TextAlign.center,
-          ),
-          
-          const SizedBox(height: 20),
-          
-          // Rotating Skills Orbit
-          Consumer<PortfolioViewModel>(
-            builder: (context, viewModel, child) {
-              return _buildSkillsOrbit(context, viewModel);
-            },
-          ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              decoration: BoxDecoration(
+                color: context.theme.secondaryDark.withValues(alpha: 0.5),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: context.theme.neonGreen.withValues(alpha: 0.2),
+                ),
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    r'$ cat skills.txt',
+                    style: context.theme.terminalText.copyWith(
+                      color: context.theme.textSecondary,
+                      fontSize: isMobile ? 13 : 15,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Technologies I work with',
+                    style: context.theme.terminalText.copyWith(
+                      color: context.theme.neonGreen,
+                      fontSize: isMobile ? 16 : 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 40),
+
+            // Rotating Skills Orbit
+            Consumer<PortfolioViewModel>(
+              builder: (context, viewModel, child) {
+                return _buildSkillsOrbit(context, viewModel);
+              },
+            ),
           ],
         ),
       ),
@@ -99,7 +115,7 @@ class _SkillsSectionState extends State<SkillsSection>
           padding: const EdgeInsets.all(32.0),
           child: textMediumLarge(
             text: "No skills to display.",
-            color: AppTheme.textSecondary,
+            color: context.theme.textSecondary,
             textAlign: TextAlign.center,
           ),
         ),
@@ -110,8 +126,16 @@ class _SkillsSectionState extends State<SkillsSection>
     return LayoutBuilder(
       builder: (context, constraints) {
         final maxWidth = constraints.maxWidth;
-        final centerSize = isMobile ? 120.0 : isTablet ? 150.0 : 180.0;
-        final nodeSize = isMobile ? 44.0 : isTablet ? 52.0 : 60.0;
+        final centerSize = isMobile
+            ? 120.0
+            : isTablet
+            ? 150.0
+            : 180.0;
+        final nodeSize = isMobile
+            ? 44.0
+            : isTablet
+            ? 52.0
+            : 60.0;
 
         // Safe distances
         final double maxAllowedRadius = (maxWidth / 2) - (nodeSize / 2) - 12;
@@ -149,7 +173,9 @@ class _SkillsSectionState extends State<SkillsSection>
           }
           final double minChord = nodeSizeOuter + 14.0; // desired gap
           final double sinVal = math.sin(math.pi / n);
-          double requiredR = sinVal == 0 ? maxAllowedRadius : (minChord / (2 * sinVal));
+          double requiredR = sinVal == 0
+              ? maxAllowedRadius
+              : (minChord / (2 * sinVal));
           requiredR = requiredR.isFinite ? requiredR : maxAllowedRadius;
           // Cap to bounds
           radiusOuter = requiredR.clamp(minClearRadius, maxAllowedRadius);
@@ -160,12 +186,22 @@ class _SkillsSectionState extends State<SkillsSection>
           }
         } else {
           // Web/Tablet: inner ring close to center, outer ring farther with clear separation
-          radiusInner = (minClearRadius + 16.0).clamp(minClearRadius, maxAllowedRadius);
-          final double desiredGapRadial = nodeSize + 26.0; // space between rings
-          radiusOuter = (radiusInner + desiredGapRadial).clamp(minClearRadius, maxAllowedRadius);
+          radiusInner = (minClearRadius + 16.0).clamp(
+            minClearRadius,
+            maxAllowedRadius,
+          );
+          final double desiredGapRadial =
+              nodeSize + 26.0; // space between rings
+          radiusOuter = (radiusInner + desiredGapRadial).clamp(
+            minClearRadius,
+            maxAllowedRadius,
+          );
           // If outer hits boundary, pull inner inward but keep above clear radius
           if (radiusOuter >= maxAllowedRadius - 0.1) {
-            radiusInner = math.max(minClearRadius + 10.0, radiusOuter - (nodeSize + 22.0));
+            radiusInner = math.max(
+              minClearRadius + 10.0,
+              radiusOuter - (nodeSize + 22.0),
+            );
           }
         }
 
@@ -173,7 +209,8 @@ class _SkillsSectionState extends State<SkillsSection>
         final ringExtent = isMobile
             ? radiusOuter
             : math.max(radiusOuter, radiusInner ?? radiusOuter);
-        final totalHeight = centerSize + 2 * (ringExtent + (nodeSizeOuter / 2) + 12);
+        final totalHeight =
+            centerSize + 2 * (ringExtent + (nodeSizeOuter / 2) + 12);
 
         return SizedBox(
           height: totalHeight,
@@ -188,13 +225,18 @@ class _SkillsSectionState extends State<SkillsSection>
                   return Stack(
                     alignment: Alignment.center,
                     children: List.generate(outerSkills.length, (index) {
-                      final theta = (index / outerSkills.length) * 2 * math.pi + angleOffset;
+                      final theta =
+                          (index / outerSkills.length) * 2 * math.pi +
+                          angleOffset;
                       final dx = radiusOuter * math.cos(theta);
                       final dy = radiusOuter * math.sin(theta);
                       return Transform.translate(
                         offset: Offset(dx, dy),
                         transformHitTests: true,
-                        child: _buildSkillNode(outerSkills[index], nodeSizeOuter),
+                        child: _buildSkillNode(
+                          outerSkills[index],
+                          nodeSizeOuter,
+                        ),
                       );
                     }),
                   );
@@ -207,18 +249,23 @@ class _SkillsSectionState extends State<SkillsSection>
                   animation: _rotationController,
                   builder: (context, _) {
                     final innerRadius = radiusInner ?? (minClearRadius + 14.0);
-                    final angleOffset = -_rotationController.value * 2 * math.pi;
+                    final angleOffset =
+                        -_rotationController.value * 2 * math.pi;
                     return Stack(
                       alignment: Alignment.center,
                       children: List.generate(innerSkills.length, (index) {
                         final theta =
-                            (index / innerSkills.length) * 2 * math.pi + angleOffset;
+                            (index / innerSkills.length) * 2 * math.pi +
+                            angleOffset;
                         final dx = innerRadius * math.cos(theta);
                         final dy = innerRadius * math.sin(theta);
                         return Transform.translate(
                           offset: Offset(dx, dy),
                           transformHitTests: true,
-                          child: _buildSkillNode(innerSkills[index], nodeSize * 0.88),
+                          child: _buildSkillNode(
+                            innerSkills[index],
+                            nodeSize * 0.88,
+                          ),
                         );
                       }),
                     );
@@ -236,21 +283,21 @@ class _SkillsSectionState extends State<SkillsSection>
       },
     );
   }
-  
+
   Widget _buildCenterProfile(double size) {
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        gradient: AppTheme.cardGradient,
+        gradient: context.theme.cardGradient,
         border: Border.all(
-          color: AppTheme.neonGreen.withOpacity(0.4),
+          color: context.theme.neonGreen.withValues(alpha: 0.4),
           width: 2,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.neonGreen.withOpacity(0.15),
+            color: context.theme.neonGreen.withValues(alpha: 0.15),
             blurRadius: 40,
             spreadRadius: 4,
           ),
@@ -260,13 +307,16 @@ class _SkillsSectionState extends State<SkillsSection>
         child: Image.asset(
           'assets/images/profile_image.png',
           fit: BoxFit.cover,
+          cacheWidth: 360,
+          cacheHeight: 360,
         ),
       ),
     );
   }
 
   Widget _buildSkillNode(Skill skill, double size) {
-    final String url = skill.learnMoreUrl ??
+    final String url =
+        skill.learnMoreUrl ??
         'https://www.google.com/search?q=${Uri.encodeComponent(skill.name)}';
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -299,26 +349,29 @@ class _SkillsSectionState extends State<SkillsSection>
                   height: size,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: AppTheme.cardGradient,
+                    gradient: context.theme.cardGradient,
                     border: Border.all(
-                      color: AppTheme.neonGreen.withOpacity(0.35),
+                      color: context.theme.neonGreen.withValues(alpha: 0.35),
                       width: 1,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: AppTheme.neonGreen.withOpacity(0.18),
+                        color: context.theme.neonGreen.withValues(alpha: 0.18),
                         blurRadius: 20,
                         offset: const Offset(0, 8),
                       ),
                     ],
                   ),
                   child: ClipOval(
-                    child: Padding(
+                      child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Image.asset(
                         skill.imagePath,
-                        color: (skill.shouldAddColor ?? false) ? Colors.white : null,
+                        color: (skill.shouldAddColor ?? false)
+                            ? Colors.white
+                            : null,
                         fit: BoxFit.contain,
+                        cacheWidth: 120,
                       ),
                     ),
                   ),
@@ -328,7 +381,7 @@ class _SkillsSectionState extends State<SkillsSection>
                   width: size + 40,
                   child: textSemiBoldMicro(
                     text: skill.name,
-                    color: AppTheme.textPrimary,
+                    color: context.theme.textPrimary,
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -341,5 +394,4 @@ class _SkillsSectionState extends State<SkillsSection>
       ),
     );
   }
-
 }

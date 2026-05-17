@@ -5,6 +5,7 @@ class ContactInfo {
   final String location;
   final String github;
   final String linkedin;
+  final String? instagram;
   final String? website;
 
   const ContactInfo({
@@ -14,6 +15,7 @@ class ContactInfo {
     required this.location,
     required this.github,
     required this.linkedin,
+    this.instagram,
     this.website,
   });
 }

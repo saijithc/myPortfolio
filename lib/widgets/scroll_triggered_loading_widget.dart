@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio/utils/text_utils.dart';
-import 'dart:ui';
 
 class ScrollTriggeredLoadingWidget extends StatefulWidget {
   final Widget child;
@@ -17,58 +15,44 @@ class ScrollTriggeredLoadingWidget extends StatefulWidget {
   });
 
   @override
-  State<ScrollTriggeredLoadingWidget> createState() => _ScrollTriggeredLoadingWidgetState();
+  State<ScrollTriggeredLoadingWidget> createState() =>
+      _ScrollTriggeredLoadingWidgetState();
 }
 
-class _ScrollTriggeredLoadingWidgetState extends State<ScrollTriggeredLoadingWidget>
+class _ScrollTriggeredLoadingWidgetState
+    extends State<ScrollTriggeredLoadingWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
-  late Animation<double> _blurAnimation;
   late Animation<double> _slideAnimation;
   late Animation<double> _scaleAnimation;
-  bool _isLoaded = false;
   bool _hasTriggered = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
+    _controller = AnimationController(duration: widget.duration, vsync: this);
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.4, 1.0, curve: Curves.easeOutCubic),
+      ),
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.4, 1.0, curve: Curves.easeOutCubic),
-    ));
+    _slideAnimation = Tween<double>(begin: 60.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic),
+      ),
+    );
 
-    _blurAnimation = Tween<double>(
-      begin: widget.blurRadius,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.7, curve: Curves.easeOutCubic),
-    ));
-
-    _slideAnimation = Tween<double>(
-      begin: 60.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic),
-    ));
-
-    _scaleAnimation = Tween<double>(
-      begin: 0.95,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
-    ));
+    _scaleAnimation = Tween<double>(begin: 0.95, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
+      ),
+    );
 
     // Use a more efficient visibility check
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -90,13 +74,11 @@ class _ScrollTriggeredLoadingWidgetState extends State<ScrollTriggeredLoadingWid
 
     final position = renderBox.localToGlobal(Offset.zero);
     final screenHeight = MediaQuery.of(context).size.height;
-    
+
     // Trigger when widget is 200px before entering viewport
     if (position.dy < screenHeight + 200) {
       _hasTriggered = true;
-      setState(() {
-        _isLoaded = true;
-      });
+      setState(() {});
       _controller.forward();
     } else {
       // Check again after a short delay
@@ -114,10 +96,7 @@ class _ScrollTriggeredLoadingWidgetState extends State<ScrollTriggeredLoadingWid
           offset: Offset(_slideAnimation.value, 0),
           child: Transform.scale(
             scale: _scaleAnimation.value,
-            child: Opacity(
-              opacity: _fadeAnimation.value,
-              child: widget.child,
-            ),
+            child: Opacity(opacity: _fadeAnimation.value, child: widget.child),
           ),
         );
       },

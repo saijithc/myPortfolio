@@ -37,13 +37,9 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
       vsync: this,
     );
 
-    _blurAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOutSine,
-    ));
+    _blurAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine),
+    );
 
     // Initialize scroll position only if controller is attached
     if (widget.scrollController.hasClients) {
@@ -62,7 +58,6 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
 
   void _onScroll() {
     if (!mounted || !widget.scrollController.hasClients) {
-     
       return;
     }
 
@@ -71,9 +66,9 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
     final isScrollingDown = scrollDelta > 1; // Reduced threshold
     final isScrollingUp = scrollDelta < -1;
     final isAtTop = currentPosition <= 0;
-    final isAtBottom = currentPosition >= widget.scrollController.position.maxScrollExtent;
-    
-   
+    final isAtBottom =
+        currentPosition >= widget.scrollController.position.maxScrollExtent;
+
     // Update direction immediately when scrolling
     if (isScrollingDown) {
       if (_isScrollingDown != true) {
@@ -88,9 +83,9 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
         });
       }
     }
-    
+
     _lastScrollPosition = currentPosition;
-    
+
     // Show blur when actively scrolling (not at edges)
     if ((isScrollingDown && !isAtTop) || (isScrollingUp && !isAtBottom)) {
       if (!_isScrolling) {
@@ -124,8 +119,7 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
     return Stack(
       children: [
         widget.child,
-        
-      
+
         // Top blur overlay (when scrolling down)
         if (_isScrolling && _isScrollingDown)
           Positioned(
@@ -167,9 +161,15 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
-                                  Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
-                                  Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
+                                  Colors.black.withValues(
+                                    alpha: 0.7 * _blurAnimation.value,
+                                  ),
+                                  Colors.black.withValues(
+                                    alpha: 0.4 * _blurAnimation.value,
+                                  ),
+                                  Colors.black.withValues(
+                                    alpha: 0.2 * _blurAnimation.value,
+                                  ),
                                   Colors.transparent,
                                   Colors.transparent,
                                 ],
@@ -185,7 +185,7 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
               ),
             ),
           ),
-        
+
         // Bottom blur overlay (when scrolling up)
         if (_isScrolling && !_isScrollingDown)
           Positioned(
@@ -206,13 +206,21 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
                           colors: [
-                             Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
-                                  Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
-                                  Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
-                                  Colors.black.withValues(alpha: 0.05 * _blurAnimation.value),
-                                  Colors.transparent,
+                            Colors.black.withValues(
+                              alpha: 0.7 * _blurAnimation.value,
+                            ),
+                            Colors.black.withValues(
+                              alpha: 0.4 * _blurAnimation.value,
+                            ),
+                            Colors.black.withValues(
+                              alpha: 0.2 * _blurAnimation.value,
+                            ),
+                            Colors.black.withValues(
+                              alpha: 0.05 * _blurAnimation.value,
+                            ),
+                            Colors.transparent,
                           ],
-                           stops: const [0.0, 0.4, 0.7, 0.9, 1.0],
+                          stops: const [0.0, 0.4, 0.7, 0.9, 1.0],
                         ),
                       ),
                       child: ClipRect(
@@ -227,10 +235,18 @@ class _ScrollBlurOverlayState extends State<ScrollBlurOverlay>
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
                                 colors: [
-                                  Colors.black.withValues(alpha: 0.7 * _blurAnimation.value),
-                                  Colors.black.withValues(alpha: 0.4 * _blurAnimation.value),
-                                  Colors.black.withValues(alpha: 0.2 * _blurAnimation.value),
-                                  Colors.black.withValues(alpha: 0.05 * _blurAnimation.value),
+                                  Colors.black.withValues(
+                                    alpha: 0.7 * _blurAnimation.value,
+                                  ),
+                                  Colors.black.withValues(
+                                    alpha: 0.4 * _blurAnimation.value,
+                                  ),
+                                  Colors.black.withValues(
+                                    alpha: 0.2 * _blurAnimation.value,
+                                  ),
+                                  Colors.black.withValues(
+                                    alpha: 0.05 * _blurAnimation.value,
+                                  ),
                                   Colors.transparent,
                                 ],
                                 stops: const [0.0, 0.4, 0.7, 0.9, 1.0],

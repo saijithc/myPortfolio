@@ -27,10 +27,7 @@ class _TypingAnimationState extends State<TypingAnimation>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
 
     _controller.addListener(() {
       if (_controller.isCompleted) {

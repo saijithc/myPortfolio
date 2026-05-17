@@ -18,7 +18,7 @@ const FontWeight fontWeightBold = FontWeight.w700;
 const FontWeight fontWeightExtraBold = FontWeight.w800;
 const FontWeight fontWeightBlack = FontWeight.w900;
 
-// Utility function to create a text widget dynamically
+// Utility function to create a text widget with Poppins (for headings)
 Widget styledText({
   required String text,
   required Color color,
@@ -43,7 +43,32 @@ Widget styledText({
   );
 }
 
-/// Text widget with font size 12 and weight Regular (w400)
+// Utility function to create body text with Inter (for body text)
+Widget styledBodyText({
+  required String text,
+  required Color color,
+  double fontSize = fontSizeDefault,
+  FontWeight fontWeight = fontWeightRegular,
+  TextAlign textAlign = TextAlign.start,
+  TextOverflow? overflow,
+  int? maxLines,
+  TextDecoration? decoration,
+}) {
+  return Text(
+    text,
+    textAlign: textAlign,
+    overflow: overflow,
+    maxLines: maxLines,
+    style: GoogleFonts.inter(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      decoration: decoration,
+    ),
+  );
+}
+
+/// Text widget with font size 12 and weight Regular (w400) - Uses Inter for body text
 Widget textRegularMicro({
   required String text,
   required Color color,
@@ -51,19 +76,18 @@ Widget textRegularMicro({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeMicro,
-      fontWeight: fontWeightRegular,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledBodyText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeMicro,
+  fontWeight: fontWeightRegular,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
-/// Text widget with font size 14 and weight Regular (w400)
+/// Text widget with font size 14 and weight Regular (w400) - Uses Inter for body text
 Widget textRegularSmall({
   required String text,
   required Color color,
@@ -71,19 +95,18 @@ Widget textRegularSmall({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeSmall,
-      fontWeight: fontWeightRegular,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledBodyText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeSmall,
+  fontWeight: fontWeightRegular,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
-/// Text widget with font size 16 and weight Regular (w400)
+/// Text widget with font size 16 and weight Regular (w400) - Uses Inter for body text
 Widget textRegularDefault({
   required String text,
   required Color color,
@@ -91,19 +114,18 @@ Widget textRegularDefault({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeDefault,
-      fontWeight: fontWeightRegular,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledBodyText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeDefault,
+  fontWeight: fontWeightRegular,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
-/// Text widget with font size 18 and weight Regular (w400)
+/// Text widget with font size 18 and weight Regular (w400) - Uses Inter for body text
 Widget textRegularLarge({
   required String text,
   required Color color,
@@ -111,17 +133,16 @@ Widget textRegularLarge({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeLarge,
-      fontWeight: fontWeightRegular,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledBodyText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeLarge,
+  fontWeight: fontWeightRegular,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 12 and weight Medium (w500)
 Widget textMediumMicro({
@@ -131,17 +152,16 @@ Widget textMediumMicro({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      overflow: overflow,
-      fontSize: fontSizeMicro,
-      fontWeight: fontWeightMedium,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  overflow: overflow,
+  fontSize: fontSizeMicro,
+  fontWeight: fontWeightMedium,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 14 and weight Medium (w500)
 Widget textMediumSmall({
@@ -151,17 +171,16 @@ Widget textMediumSmall({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      overflow: overflow,
-      fontSize: fontSizeSmall,
-      fontWeight: fontWeightMedium,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  overflow: overflow,
+  fontSize: fontSizeSmall,
+  fontWeight: fontWeightMedium,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 16 and weight Medium (w500)
 Widget textMediumDefault({
@@ -171,17 +190,16 @@ Widget textMediumDefault({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeDefault,
-      fontWeight: fontWeightMedium,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeDefault,
+  fontWeight: fontWeightMedium,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 18 and weight Medium (w500)
 Widget textMediumLarge({
@@ -191,17 +209,16 @@ Widget textMediumLarge({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      overflow: overflow,
-      fontSize: fontSizeLarge,
-      fontWeight: fontWeightMedium,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  overflow: overflow,
+  fontSize: fontSizeLarge,
+  fontWeight: fontWeightMedium,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 12 and weight SemiBold (w600)
 Widget textSemiBoldMicro({
@@ -211,17 +228,16 @@ Widget textSemiBoldMicro({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeMicro,
-      fontWeight: fontWeightSemiBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeMicro,
+  fontWeight: fontWeightSemiBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 14 and weight SemiBold (w600)
 Widget textSemiBoldSmall({
@@ -231,17 +247,16 @@ Widget textSemiBoldSmall({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeSmall,
-      fontWeight: fontWeightSemiBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeSmall,
+  fontWeight: fontWeightSemiBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 16 and weight SemiBold (w600)
 Widget textSemiBoldDefault({
@@ -251,17 +266,16 @@ Widget textSemiBoldDefault({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      overflow: overflow,
-      fontSize: fontSizeDefault,
-      fontWeight: fontWeightSemiBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  overflow: overflow,
+  fontSize: fontSizeDefault,
+  fontWeight: fontWeightSemiBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 18 and weight SemiBold (w600)
 Widget textSemiBoldLarge({
@@ -271,17 +285,16 @@ Widget textSemiBoldLarge({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeLarge,
-      fontWeight: fontWeightSemiBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeLarge,
+  fontWeight: fontWeightSemiBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 12 and weight Bold (w700)
 Widget textBoldMicro({
@@ -291,17 +304,16 @@ Widget textBoldMicro({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeMicro,
-      fontWeight: fontWeightBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeMicro,
+  fontWeight: fontWeightBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 14 and weight Bold (w700)
 Widget textBoldSmall({
@@ -311,17 +323,16 @@ Widget textBoldSmall({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeSmall,
-      fontWeight: fontWeightBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeSmall,
+  fontWeight: fontWeightBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 16 and weight Bold (w700)
 Widget textBoldDefault({
@@ -331,17 +342,16 @@ Widget textBoldDefault({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      overflow: overflow,
-      fontSize: fontSizeDefault,
-      fontWeight: fontWeightBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  overflow: overflow,
+  fontSize: fontSizeDefault,
+  fontWeight: fontWeightBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 18 and weight Bold (w700)
 Widget textBoldLarge({
@@ -351,17 +361,16 @@ Widget textBoldLarge({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeLarge,
-      fontWeight: fontWeightBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeLarge,
+  fontWeight: fontWeightBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 12 and weight ExtraBold (w800)
 Widget textExtraBoldMicro({
@@ -371,16 +380,15 @@ Widget textExtraBoldMicro({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      fontSize: fontSizeMicro,
-      fontWeight: fontWeightExtraBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  fontSize: fontSizeMicro,
+  fontWeight: fontWeightExtraBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 14 and weight ExtraBold (w800)
 Widget textExtraBoldSmall({
@@ -390,17 +398,16 @@ Widget textExtraBoldSmall({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeSmall,
-      fontWeight: fontWeightExtraBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeSmall,
+  fontWeight: fontWeightExtraBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 16 and weight ExtraBold (w800)
 Widget textExtraBoldDefault({
@@ -410,17 +417,16 @@ Widget textExtraBoldDefault({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeDefault,
-      fontWeight: fontWeightExtraBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeDefault,
+  fontWeight: fontWeightExtraBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 18 and weight ExtraBold (w800)
 Widget textExtraBoldLarge({
@@ -430,17 +436,16 @@ Widget textExtraBoldLarge({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      overflow: overflow,
-      fontSize: fontSizeLarge,
-      fontWeight: fontWeightExtraBold,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  overflow: overflow,
+  fontSize: fontSizeLarge,
+  fontWeight: fontWeightExtraBold,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 12 and weight Black (w900)
 Widget textBlackMicro({
@@ -450,17 +455,16 @@ Widget textBlackMicro({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeMicro,
-      fontWeight: fontWeightBlack,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeMicro,
+  fontWeight: fontWeightBlack,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 14 and weight Black (w900)
 Widget textBlackSmall({
@@ -470,17 +474,16 @@ Widget textBlackSmall({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      overflow: overflow,
-      fontSize: fontSizeSmall,
-      fontWeight: fontWeightBlack,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  overflow: overflow,
+  fontSize: fontSizeSmall,
+  fontWeight: fontWeightBlack,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 16 and weight Black (w900)
 Widget textBlackDefault({
@@ -490,17 +493,16 @@ Widget textBlackDefault({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSizeDefault,
-      fontWeight: fontWeightBlack,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSizeDefault,
+  fontWeight: fontWeightBlack,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Text widget with font size 18 and weight Black (w900)
 Widget textBlackLarge({
@@ -510,17 +512,16 @@ Widget textBlackLarge({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      maxLines: maxLines,
-      overflow: overflow,
-      fontSize: fontSizeLarge,
-      fontWeight: fontWeightBlack,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  maxLines: maxLines,
+  overflow: overflow,
+  fontSize: fontSizeLarge,
+  fontWeight: fontWeightBlack,
+  textAlign: textAlign,
+  decoration: decoration,
+);
 
 /// Custom text widget with configurable font size and weight
 Widget textCustom({
@@ -532,14 +533,13 @@ Widget textCustom({
   TextOverflow? overflow,
   int? maxLines,
   TextDecoration? decoration,
-}) =>
-    styledText(
-      text: text,
-      color: color,
-      overflow: overflow,
-      maxLines: maxLines,
-      fontSize: fontSize ?? fontSizeLarge,
-      fontWeight: fontWeight ?? fontWeightBlack,
-      textAlign: textAlign,
-      decoration: decoration,
-    );
+}) => styledText(
+  text: text,
+  color: color,
+  overflow: overflow,
+  maxLines: maxLines,
+  fontSize: fontSize ?? fontSizeLarge,
+  fontWeight: fontWeight ?? fontWeightBlack,
+  textAlign: textAlign,
+  decoration: decoration,
+);

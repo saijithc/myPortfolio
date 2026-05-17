@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../constants/app_constants.dart';
 import '../../constants/app_theme.dart';
-import '../../widgets/animated_counter.dart';
-import '../../widgets/glow_card.dart';
-import '../../utils/text_utils.dart';
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
@@ -14,456 +11,201 @@ class AboutSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
 
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 20 : 40,
-        vertical: 80,
-      ),
-      child: Column(
-        children: [
-          // Section Title
-          textCustom(
-            text: 'About Me',
-            color: AppTheme.textPrimary,
-            fontSize: isMobile ? 24 : 32,
-            fontWeight: FontWeight.bold,
-            textAlign: TextAlign.center,
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 700),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 40,
+            vertical: isMobile ? 40 : 80,
           ),
-          
-          const SizedBox(height: 20),
-          
-          // Section Subtitle
-          textSemiBoldLarge(
-            text: 'Get to know me better',
-            color: AppTheme.neonGreen,
-            textAlign: TextAlign.center,
-          ),
-          
-          const SizedBox(height: 60),
-          
-          // Content Row
-          if (isMobile) ...[
-            _buildMobileLayout(context),
-          ] else ...[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Left Column - About Text
-                Expanded(
-                  // flex: 2,
-                  child: _buildAboutText(context),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
                 ),
-                
-                // const SizedBox(width: 60),
-                
-                // Right Column - Contact Info
-                // Expanded(
-                //   flex: 1,
-                //   child: _buildContactInfo(context),
-                // ),
-              ],
-            ),
-          ],
-          
-          const SizedBox(height: 80),
-          
-          // Achievement Counters
-          _buildAchievementCounters(context),
-        ],
-      ),
-    );
-  }
+                decoration: BoxDecoration(
+                  color: context.theme.secondaryDark.withValues(alpha: 0.5),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: context.theme.neonGreen.withValues(alpha: 0.2),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      r'$ cat about.txt',
+                      style: context.theme.terminalText.copyWith(
+                        color: context.theme.textSecondary,
+                        fontSize: isMobile ? 13 : 15,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Get to know me better',
+                      style: context.theme.terminalText.copyWith(
+                        color: context.theme.neonGreen,
+                        fontSize: isMobile ? 16 : 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
-  Widget _buildMobileLayout(BuildContext context) {
-    return Column(
-      children: [
-        _buildAboutText(context),
-        // const SizedBox(height: 40),
-        // _buildContactInfo(context),
-      ],
+              const SizedBox(height: 40),
+
+              // Content
+              _buildAboutText(context),
+
+              // const SizedBox(height: 80),
+
+              // Achievement Counters
+              // _buildAchievementCounters(context),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
   Widget _buildAboutText(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        textRegularLarge(
-          text: AppConstants.aboutSummary,
-          color: AppTheme.textSecondary,
-          textAlign: TextAlign.center,
-        ),
-        
-        const SizedBox(height: 30),
-        
-        // Location
-        Row(
-          children: [
-            const Icon(
-              Icons.location_on,
-              color: AppTheme.neonGreen,
-              size: 20,
+    return Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: context.theme.secondaryDark,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: context.theme.neonGreen.withValues(alpha: 0.3),
             ),
-            const SizedBox(width: 8),
-            textCustom(
-              text: AppConstants.contactInfo.location,
-              color: AppTheme.textPrimary,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
- Widget _buildContactInfo(BuildContext context) {
-    final contactInfo = AppConstants.contactInfo;
-    
-    return GlowCard(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          textBoldDefault(
-            text: 'Contact Information',
-            color: AppTheme.textPrimary,
-          ),
-          
-          const SizedBox(height: 24),
-          
-          _buildContactItem(
-            Icons.person,
-            'Name',
-            contactInfo.name,
-          ),
-          
-          const SizedBox(height: 20),
-          
-          _buildContactItem(
-            Icons.email,
-            'Email',
-            contactInfo.email,
-            onTap: () => _launchEmail(contactInfo.email),
-          ),
-          
-          const SizedBox(height: 20),
-          
-          _buildContactItem(
-            Icons.phone,
-            'Phone',
-            contactInfo.phone,
-            onTap: () => _launchPhone(contactInfo.phone),
-          ),
-          
-          const SizedBox(height: 20),
-          
-          _buildContactItem(
-            Icons.location_on,
-            'Location',
-            contactInfo.location,
-          ),
-          
-          const SizedBox(height: 32),
-          
-          // Social Links
-          textSemiBoldLarge(
-            text: 'Connect with me',
-            color: AppTheme.textPrimary,
-          ),
-          
-          const SizedBox(height: 16),
-          
-          Row(
-            children: [
-              _buildSocialButton(
-                'GitHub',
-                Icons.code,
-                () => _launchUrl('https://${contactInfo.github}'),
-              ),
-              const SizedBox(width: 16),
-              _buildSocialButton(
-                'LinkedIn',
-                Icons.work,
-                () => _launchUrl('https://${contactInfo.linkedin}'),
+            boxShadow: [
+              BoxShadow(
+                color: context.theme.neonGreen.withValues(alpha: 0.05),
+                blurRadius: 20,
+                spreadRadius: 5,
               ),
             ],
-          ),
-        ],
-      ),
-    );
-  }
- Widget _buildSocialButton(String label, IconData icon, VoidCallback onTap) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          decoration: BoxDecoration(
-            border: Border.all(color: AppTheme.neonGreen.withOpacity(0.3)),
-            borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Icon(
-                icon,
-                color: AppTheme.neonGreen,
-                size: 24,
+              // Terminal Header
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: context.theme.accentDark,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(11),
+                    topRight: Radius.circular(11),
+                  ),
+                  border: Border(
+                    bottom: BorderSide(
+                      color: context.theme.neonGreen.withValues(alpha: 0.3),
+                    ),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        _buildTerminalDot(Colors.redAccent),
+                        const SizedBox(width: 8),
+                        _buildTerminalDot(Colors.orangeAccent),
+                        const SizedBox(width: 8),
+                        _buildTerminalDot(Colors.greenAccent),
+                      ],
+                    ),
+                    Expanded(
+                      child: Text(
+                        'guest@saijithc:~/about',
+                        style: context.theme.bodySmall.copyWith(
+                          color: context.theme.textSecondary,
+                          fontFamily: 'JetBrains Mono',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(width: 48), // Balance for centering
+                  ],
+                ),
               ),
-              const SizedBox(height: 8),
-              textMediumDefault(
-                text: label,
-                color: AppTheme.neonGreen,
-                textAlign: TextAlign.center,
+              // Terminal Body
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '> cat about_me.txt',
+                      style: context.theme.terminalText.copyWith(
+                        color: context.theme.textSecondary,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      AppConstants.aboutSummary,
+                      style: context.theme.terminalText.copyWith(
+                        color: context.theme.textPrimary,
+                        height: 1.6,
+                        fontSize: 15,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      '> location --show',
+                      style: context.theme.terminalText.copyWith(
+                        color: context.theme.textSecondary,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          color: context.theme.neonGreen,
+                          size: 18,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          AppConstants.contactInfo.location,
+                          style: context.theme.terminalText.copyWith(
+                            color: context.theme.neonGreen,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    // Blinking cursor
+                    Text(
+                          '> _',
+                          style: context.theme.terminalText.copyWith(
+                            color: context.theme.neonGreen,
+                          ),
+                        )
+                        .animate(onPlay: (controller) => controller.repeat())
+                        .fadeIn(duration: 400.ms)
+                        .fadeOut(duration: 400.ms, delay: 400.ms),
+                  ],
+                ),
               ),
             ],
           ),
-        ),
-      ),
+        )
+        .animate()
+        .slideY(begin: 0.2, end: 0, duration: 600.ms, curve: Curves.easeOut)
+        .fadeIn(duration: 600.ms);
+  }
+
+  Widget _buildTerminalDot(Color color) {
+    return Container(
+      width: 12,
+      height: 12,
+      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
     );
-  }
-  // Widget _buildContactInfo(BuildContext context) {
-  //   final contactInfo = AppConstants.contactInfo;
-    
-  //   return GlowCard(
-  //     padding: const EdgeInsets.all(24),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           'Contact Information',
-  //           style: AppTheme.headingSmall.copyWith(
-  //             color: AppTheme.textPrimary,
-  //             fontWeight: FontWeight.bold,
-  //           ),
-  //         ),
-          
-  //         const SizedBox(height: 24),
-          
-  //         _buildContactItem(
-  //           Icons.person,
-  //           'Name',
-  //           contactInfo.name,
-  //         ),
-          
-  //         const SizedBox(height: 16),
-          
-  //         _buildContactItem(
-  //           Icons.email,
-  //           'Email',
-  //           contactInfo.email,
-  //           onTap: () => _launchEmail(contactInfo.email),
-  //         ),
-          
-  //         const SizedBox(height: 16),
-          
-  //         _buildContactItem(
-  //           Icons.phone,
-  //           'Phone',
-  //           contactInfo.phone,
-  //           onTap: () => _launchPhone(contactInfo.phone),
-  //         ),
-          
-  //         const SizedBox(height: 16),
-          
-  //         _buildContactItem(
-  //           Icons.location_on,
-  //           'Location',
-  //           contactInfo.location,
-  //         ),
-          
-  //         const SizedBox(height: 24),
-          
-  //         // Social Links
-  //         Row(
-  //           children: [
-  //             _buildSocialIcon(
-  //               'GitHub',
-  //               () => _launchUrl('https://${contactInfo.github}'),
-  //             ),
-  //             const SizedBox(width: 16),
-  //             _buildSocialIcon(
-  //               'LinkedIn',
-  //               () => _launchUrl('https://${contactInfo.linkedin}'),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  Widget _buildContactItem(
-    IconData icon,
-    String label,
-    String value, {
-    VoidCallback? onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: AppTheme.neonGreen,
-              size: 18,
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  textRegularSmall(
-                    text: label,
-                    color: AppTheme.textTertiary,
-                  ),
-                  const SizedBox(height: 2),
-                  textCustom(
-                    text: value,
-                    color: AppTheme.textPrimary,
-                    fontWeight: onTap != null ? FontWeight.w500 : FontWeight.normal,
-                  ),
-                ],
-              ),
-            ),
-            if (onTap != null)
-              const Icon(
-                Icons.open_in_new,
-                color: AppTheme.neonGreen,
-                size: 16,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSocialIcon(String tooltip, VoidCallback onTap) {
-    return Tooltip(
-      message: tooltip,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            border: Border.all(color: AppTheme.neonGreen.withOpacity(0.3)),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(
-            Icons.code,
-            color: AppTheme.neonGreen,
-            size: 20,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAchievementCounters(BuildContext context) {
-    final isMobile = ResponsiveBreakpoints.of(context).isMobile;
-    final achievements = AppConstants.achievements;
-
-    return Column(
-      children: [
-        textBoldDefault(
-          text: 'My Achievements',
-          color: AppTheme.textPrimary,
-          textAlign: TextAlign.center,
-        ),
-        
-        const SizedBox(height: 40),
-        
-        if (isMobile) ...[
-          // Mobile Layout - Single Column
-          ...achievements.map<Widget>((achievement) => Padding(
-            padding: const EdgeInsets.only(bottom: 24),
-            child: _buildAchievementCard(achievement),
-          )),
-        ] else ...[
-          // Desktop Layout - Grid
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 24,
-              childAspectRatio: 1.2,
-            ),
-            itemCount: achievements.length,
-            itemBuilder: (context, index) {
-              return _buildAchievementCard(achievements[index]);
-            },
-          ),
-        ],
-      ],
-    );
-  }
-
-  Widget _buildAchievementCard(achievement) {
-    return GlowCard(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          textCustom(
-            text: achievement.icon,
-            color: AppTheme.neonGreen,
-            fontSize: 28,
-          ),
-          
-          const SizedBox(height: 12),
-          
-          AnimatedCounter(
-            value: achievement.value,
-            suffix: achievement.suffix,
-            textStyle: AppTheme.headingMedium.copyWith(
-              color: AppTheme.neonGreen,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          
-          const SizedBox(height: 6),
-          
-          textSemiBoldDefault(
-            text: achievement.title,
-            color: AppTheme.textPrimary,
-            textAlign: TextAlign.center,
-          ),
-          
-          const SizedBox(height: 2),
-          
-          textRegularSmall(
-            text: achievement.description,
-            color: AppTheme.textSecondary,
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _launchEmail(String email) async {
-    final url = Uri.parse('mailto:$email');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    }
-  }
-
-  void _launchPhone(String phone) async {
-    final url = Uri.parse('tel:$phone');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    }
-  }
-
-  void _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
   }
 }

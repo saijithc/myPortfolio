@@ -1,3 +1,4 @@
+// ignore_for_file: deprecated_member_use
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 import 'dart:async';
@@ -21,5 +22,3 @@ Future<bool> openUrl(String url, {String? webTarget}) async {
     }
   }
 }
-
-

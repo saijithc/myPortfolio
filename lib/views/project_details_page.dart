@@ -12,7 +12,7 @@ class ProjectDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
     return Scaffold(
-    
+      backgroundColor: AppTheme.surface,
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 32, vertical: 24),
         child: Center(
@@ -20,52 +20,49 @@ class ProjectDetailsPage extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 1200),
             child: isMobile
                 ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                       _header(context),
-                        const SizedBox(height: 24),
-                      _buildHeroImage(context, height: 420),
+                      _header(context, isMobile),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        child: _buildHeroImage(context),
+                      ),
                       const SizedBox(height: 24),
-                      _buildTitleBlock(),
-                      const SizedBox(height: 20),
-                      _buildTechnologiesBlock(),
-                      const SizedBox(height: 20),
-                      _buildFeaturesBlock(),
-                      const SizedBox(height: 24),
-                      _buildLinksBlock(),
+                      _buildContent(context, isMobile),
                     ],
                   )
-                : Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 1,
+                : IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                      SizedBox(
+                        width: (MediaQuery.of(context).size.width - 64) * 0.25,
                         child: Column(
                           children: [
-                                 _header(context),
-                        const SizedBox(height: 24),
-                            _buildHeroImage(context, height: 520),
+                            _header(context, isMobile),
+                            const SizedBox(height: 16),
+                            Expanded(
+                              child: _buildHeroImage(context),
+                            ),
                           ],
                         ),
                       ),
                       const SizedBox(width: 32),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                                  const SizedBox(height: 60),
-                            _buildTitleBlock(),
-                            const SizedBox(height: 20),
-                            _buildTechnologiesBlock(),
-                            const SizedBox(height: 20),
-                            _buildFeaturesBlock(limit: 12),
-                            const SizedBox(height: 24),
-                            _buildLinksBlock(),
-                          ],
+                      SizedBox(
+                        width: (MediaQuery.of(context).size.width - 64) * 0.5,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 40),
+                              _buildContent(context, isMobile),
+                            ],
+                          ),
                         ),
                       ),
                     ],
+                  ),
                   ),
           ),
         ),
@@ -73,64 +70,87 @@ class ProjectDetailsPage extends StatelessWidget {
     );
   }
 
-  Row _header(BuildContext context) {
-    return Row(
-        children: [
-          IconButton(onPressed: () {
-            Navigator.pop(context);
-          }, icon: const Icon(Icons.arrow_back_ios_rounded)),
-          Text(
-            project.title,
-            style: AppTheme.headingSmall.copyWith(color: AppTheme.textPrimary),
-          ),
-        ],
-      );
+  Widget _buildContent(BuildContext context, bool isMobile) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTitleBlock(context),
+        const SizedBox(height: 24),
+        _buildTechnologiesBlock(context),
+        const SizedBox(height: 24),
+        _buildFeaturesBlock(context),
+        const SizedBox(height: 24),
+        _buildLinksBlock(context),
+      ],
+    );
   }
 
-  Widget _buildHeroImage(BuildContext context, {required double height}) {
-    return Center(
-      child: SizedBox(
-        height: height,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: AspectRatio(
-            aspectRatio: 9 / 19.5,
-            child: Hero(
-              tag: 'project-image-${project.imageUrl}',
-              child: project.imageUrl.isNotEmpty
-                  ? Image.asset(project.imageUrl, fit: BoxFit.cover)
-                  : const Icon(Icons.image, size: 64, color: AppTheme.neonGreen),
+  Widget _header(BuildContext context, bool isMobile) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Icon(Icons.arrow_back, size: 20, color: AppTheme.primaryContainer),
+          ),
+          const SizedBox(width: 12),
+          Text(
+            '\$ cd ../${project.title.toLowerCase().replaceAll(' ', '_')}',
+            style: AppTheme.codeMedium.copyWith(
+              fontSize: isMobile ? 11 : 13,
+              color: AppTheme.primaryContainer,
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeroImage(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(32),
+        child: Hero(
+          tag: 'project-image-${project.imageUrl}',
+          child: project.imageUrl.isNotEmpty
+              ? Image.asset(project.imageUrl, fit: BoxFit.cover)
+              : Container(
+                  color: AppTheme.surfaceContainerLow,
+                  child: Icon(Icons.image_outlined, size: 48, color: AppTheme.outline),
+                ),
         ),
       ),
     );
   }
 
-  Widget _buildTitleBlock() {
+  Widget _buildTitleBlock(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          project.title,
-          style: AppTheme.headingSmall.copyWith(
-            color: AppTheme.textPrimary,
-            fontWeight: FontWeight.bold,
+          project.title.toUpperCase(),
+          style: AppTheme.headingMedium.copyWith(
+            fontSize: 18,
+            color: AppTheme.onSurface,
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
         Text(
           project.description,
-          style: AppTheme.bodyMedium.copyWith(
-            color: AppTheme.textSecondary,
+          style: AppTheme.codeMedium.copyWith(
+            fontSize: 12,
+            color: AppTheme.onSurfaceVariant,
             height: 1.4,
           ),
         ),
         const SizedBox(height: 12),
         Text(
           project.longDescription,
-          style: AppTheme.bodySmall.copyWith(
-            color: AppTheme.textTertiary,
+          style: AppTheme.codeMedium.copyWith(
+            fontSize: 11,
+            color: AppTheme.outline,
             height: 1.5,
           ),
         ),
@@ -138,37 +158,34 @@ class ProjectDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTechnologiesBlock() {
+  Widget _buildTechnologiesBlock(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Technologies',
-          style: AppTheme.bodyMedium.copyWith(
-            color: AppTheme.textPrimary,
-            fontWeight: FontWeight.w600,
+          '// TECH_STACK',
+          style: AppTheme.codeMedium.copyWith(
+            fontSize: 11,
+            color: AppTheme.primaryFixedDim,
           ),
         ),
         const SizedBox(height: 8),
         Wrap(
-          spacing: 8,
-          runSpacing: 8,
+          spacing: 6,
+          runSpacing: 6,
           children: project.technologies.map<Widget>((tech) {
             return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
-                color: AppTheme.neonGreen.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: AppTheme.neonGreen.withOpacity(0.3),
-                  width: 1,
-                ),
+                color: AppTheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: AppTheme.primaryContainer.withValues(alpha: 0.2)),
               ),
               child: Text(
                 tech,
-                style: AppTheme.bodySmall.copyWith(
-                  color: AppTheme.neonGreen,
-                  fontWeight: FontWeight.w600,
+                style: AppTheme.codeMedium.copyWith(
+                  fontSize: 9,
+                  color: AppTheme.primaryContainer,
                 ),
               ),
             );
@@ -178,100 +195,122 @@ class ProjectDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFeaturesBlock({int? limit}) {
-    final items = limit != null ? project.features.take(limit) : project.features;
+  Widget _buildFeaturesBlock(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Highlights',
-          style: AppTheme.bodyMedium.copyWith(
-            color: AppTheme.textPrimary,
-            fontWeight: FontWeight.w600,
+          '// FEATURES',
+          style: AppTheme.codeMedium.copyWith(
+            fontSize: 11,
+            color: AppTheme.primaryFixedDim,
           ),
         ),
         const SizedBox(height: 10),
-        ...items.map<Widget>((feature) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 6),
-                  width: 6,
-                  height: 6,
-                  decoration: const BoxDecoration(
-                    color: AppTheme.neonGreen,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    feature,
-                    style: AppTheme.bodySmall.copyWith(
-                      color: AppTheme.textSecondary,
-                      height: 1.5,
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppTheme.surfaceContainerLow,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: AppTheme.primaryContainer.withValues(alpha: 0.2)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: project.features.map<Widget>((feature) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '>>',
+                      style: AppTheme.codeMedium.copyWith(
+                        fontSize: 11,
+                        color: AppTheme.primaryContainer,
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        feature,
+                        style: AppTheme.codeMedium.copyWith(
+                          fontSize: 11,
+                          color: AppTheme.onSurfaceVariant,
+                          height: 1.5,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        }),
+              );
+            }).toList(),
+          ),
+        ),
       ],
     );
   }
 
-  Widget _buildLinksBlock() {
-    return Wrap(
-      spacing: 12,
-      runSpacing: 12,
+  Widget _buildLinksBlock(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (project.androidUrl != null)
-          _linkButton(
-            icon: Icons.android,
-            label: 'Android',
-            onTap: () => _launch(project.androidUrl!),
+        Text(
+          '          // DOWNLOADS',
+          style: AppTheme.codeMedium.copyWith(
+            fontSize: 11,
+            color: AppTheme.primaryFixedDim,
           ),
-        if (project.iosUrl != null)
-          _linkButton(
-            icon: Icons.apple,
-            label: 'iOS',
-            onTap: () => _launch(project.iosUrl!),
-          ),
-        if (project.webUrl != null)
-          _linkButton(
-            icon: Icons.public,
-            label: 'Web',
-            onTap: () => _launch(project.webUrl!),
-          ),
+        ),
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            if (project.androidUrl != null)
+              _linkButton(
+                icon: Icons.android,
+                label: 'android_build.apk',
+                onTap: () => _launch(project.androidUrl!),
+              ),
+            if (project.iosUrl != null)
+              _linkButton(
+                icon: Icons.apple,
+                label: 'ios_release.ipa',
+                onTap: () => _launch(project.iosUrl!),
+              ),
+            if (project.webUrl != null)
+              _linkButton(
+                icon: Icons.public,
+                label: 'web_deploy',
+                onTap: () => _launch(project.webUrl!),
+              ),
+          ],
+        ),
       ],
     );
   }
 
   Widget _linkButton({required IconData icon, required String label, required VoidCallback onTap}) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(10),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppTheme.neonGreen.withOpacity(0.35), width: 1),
-          color: AppTheme.neonGreen.withOpacity(0.08),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: AppTheme.primaryContainer.withValues(alpha: 0.3)),
+          color: AppTheme.primaryContainer.withValues(alpha: 0.08),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 18, color: AppTheme.neonGreen),
-            const SizedBox(width: 8),
+            Icon(icon, size: 16, color: AppTheme.primaryContainer),
+            const SizedBox(width: 6),
             Text(
               label,
-              style: AppTheme.bodySmall.copyWith(
-                color: AppTheme.neonGreen,
-                fontWeight: FontWeight.w600,
+              style: AppTheme.codeMedium.copyWith(
+                fontSize: 11,
+                color: AppTheme.primaryContainer,
               ),
             ),
           ],
@@ -287,5 +326,3 @@ class ProjectDetailsPage extends StatelessWidget {
     }
   }
 }
-
-

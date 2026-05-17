@@ -17,30 +17,30 @@ class PricingSection extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : 40,
-        vertical: 80,
+        vertical: isMobile ? 40 : 80,
       ),
       child: Column(
         children: [
           // Section Title
           textCustom(
             text: 'Pricing Plans',
-            color: AppTheme.textPrimary,
+            color: context.theme.textPrimary,
             fontSize: isMobile ? 24 : 32,
             fontWeight: FontWeight.bold,
             textAlign: TextAlign.center,
           ),
-          
+
           const SizedBox(height: 20),
-          
+
           // Section Subtitle
           textSemiBoldLarge(
             text: 'Choose the perfect plan for your project',
-            color: AppTheme.neonGreen,
+            color: context.theme.neonGreen,
             textAlign: TextAlign.center,
           ),
-          
+
           const SizedBox(height: 60),
-          
+
           // Pricing Cards
           Consumer<PortfolioViewModel>(
             builder: (context, viewModel, child) {
@@ -96,8 +96,8 @@ class PricingSection extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 8),
-              decoration: const BoxDecoration(
-                gradient: AppTheme.neonGradient,
+              decoration: BoxDecoration(
+                gradient: context.theme.neonGradient,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
@@ -105,14 +105,14 @@ class PricingSection extends StatelessWidget {
               ),
               child: Text(
                 'Most Popular',
-                style: AppTheme.bodyMedium.copyWith(
-                  color: AppTheme.primaryDark,
+                style: context.theme.bodyMedium.copyWith(
+                  color: context.theme.primaryDark,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
-          
+
           // Plan Content
           Padding(
             padding: const EdgeInsets.all(24),
@@ -121,25 +121,25 @@ class PricingSection extends StatelessWidget {
                 // Plan Name
                 Text(
                   plan.name,
-                  style: AppTheme.headingSmall.copyWith(
-                    color: AppTheme.textPrimary,
+                  style: context.theme.headingSmall.copyWith(
+                    color: context.theme.textPrimary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                
+
                 const SizedBox(height: 8),
-                
+
                 // Plan Description
                 Text(
                   plan.description,
-                  style: AppTheme.bodyMedium.copyWith(
-                    color: AppTheme.textSecondary,
+                  style: context.theme.bodyMedium.copyWith(
+                    color: context.theme.textSecondary,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                
+
                 const SizedBox(height: 24),
-                
+
                 // Price
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -148,23 +148,23 @@ class PricingSection extends StatelessWidget {
                   children: [
                     Text(
                       plan.currency,
-                      style: AppTheme.headingSmall.copyWith(
-                        color: AppTheme.neonGreen,
+                      style: context.theme.headingSmall.copyWith(
+                        color: context.theme.neonGreen,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
                       plan.price.toString(),
-                      style: AppTheme.headingLarge.copyWith(
-                        color: AppTheme.neonGreen,
+                      style: context.theme.headingLarge.copyWith(
+                        color: context.theme.neonGreen,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Features List
                 ...plan.features.map<Widget>((feature) {
                   return Padding(
@@ -174,13 +174,13 @@ class PricingSection extends StatelessWidget {
                         Container(
                           width: 20,
                           height: 20,
-                          decoration: const BoxDecoration(
-                            color: AppTheme.neonGreen,
+                          decoration: BoxDecoration(
+                            color: context.theme.neonGreen,
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.check,
-                            color: AppTheme.primaryDark,
+                            color: context.theme.primaryDark,
                             size: 14,
                           ),
                         ),
@@ -188,8 +188,8 @@ class PricingSection extends StatelessWidget {
                         Expanded(
                           child: Text(
                             feature,
-                            style: AppTheme.bodyMedium.copyWith(
-                              color: AppTheme.textSecondary,
+                            style: context.theme.bodyMedium.copyWith(
+                              color: context.theme.textSecondary,
                             ),
                           ),
                         ),
@@ -197,24 +197,24 @@ class PricingSection extends StatelessWidget {
                     ),
                   );
                 }),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // CTA Button
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () => _selectPlan(context, plan),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: plan.isPopular 
-                          ? AppTheme.neonGreen 
-                          : AppTheme.accentDark,
-                      foregroundColor: plan.isPopular 
-                          ? AppTheme.primaryDark 
-                          : AppTheme.neonGreen,
-                      side: plan.isPopular 
-                          ? null 
-                          : const BorderSide(color: AppTheme.neonGreen),
+                      backgroundColor: plan.isPopular
+                          ? context.theme.neonGreen
+                          : context.theme.accentDark,
+                      foregroundColor: plan.isPopular
+                          ? context.theme.primaryDark
+                          : context.theme.neonGreen,
+                      side: plan.isPopular
+                          ? null
+                          : BorderSide(color: context.theme.neonGreen),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -223,10 +223,10 @@ class PricingSection extends StatelessWidget {
                     ),
                     child: Text(
                       plan.ctaText,
-                      style: AppTheme.buttonText.copyWith(
-                        color: plan.isPopular 
-                            ? AppTheme.primaryDark 
-                            : AppTheme.neonGreen,
+                      style: context.theme.buttonText.copyWith(
+                        color: plan.isPopular
+                            ? context.theme.primaryDark
+                            : context.theme.neonGreen,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -245,17 +245,17 @@ class PricingSection extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppTheme.secondaryDark,
+        backgroundColor: context.theme.secondaryDark,
         title: Text(
           'Selected: ${plan.name}',
-          style: AppTheme.headingSmall.copyWith(
-            color: AppTheme.textPrimary,
+          style: context.theme.headingSmall.copyWith(
+            color: context.theme.textPrimary,
           ),
         ),
         content: Text(
           'Great choice! Let\'s discuss your project requirements.',
-          style: AppTheme.bodyMedium.copyWith(
-            color: AppTheme.textSecondary,
+          style: context.theme.bodyMedium.copyWith(
+            color: context.theme.textSecondary,
           ),
         ),
         actions: [

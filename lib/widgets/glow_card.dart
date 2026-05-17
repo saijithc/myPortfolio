@@ -35,16 +35,12 @@ class _GlowCardState extends State<GlowCard>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: AppTheme.normalAnimation,
+      duration: context.theme.normalAnimation,
       vsync: this,
     );
-    _glowAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: AppTheme.defaultCurve,
-    ));
+    _glowAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: context.theme.defaultCurve),
+    );
   }
 
   @override
@@ -57,7 +53,7 @@ class _GlowCardState extends State<GlowCard>
     setState(() {
       _isHovered = isHovered;
     });
-    
+
     if (isHovered) {
       _controller.forward();
     } else {
@@ -74,28 +70,36 @@ class _GlowCardState extends State<GlowCard>
         animation: _glowAnimation,
         builder: (context, child) {
           final glowIntensity = _isHovered ? _glowAnimation.value : 0.0;
-          final borderOpacity = widget.isGlowing ? 0.5 : 0.1 + (glowIntensity * 0.4);
-          final shadowOpacity = widget.isGlowing ? 0.3 : 0.05 + (glowIntensity * 0.25);
+          final borderOpacity = widget.isGlowing
+              ? 0.5
+              : 0.1 + (glowIntensity * 0.4);
+          final shadowOpacity = widget.isGlowing
+              ? 0.3
+              : 0.05 + (glowIntensity * 0.25);
 
           return Container(
             width: widget.width,
             height: widget.height,
             margin: widget.margin,
             decoration: BoxDecoration(
-              gradient: AppTheme.cardGradient,
+              gradient: context.theme.cardGradient,
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: AppTheme.neonGreen.withOpacity(borderOpacity),
+                color: context.theme.neonGreen.withValues(alpha: borderOpacity),
                 width: 1,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppTheme.neonGreen.withOpacity(shadowOpacity),
+                  color: context.theme.neonGreen.withValues(
+                    alpha: shadowOpacity,
+                  ),
                   blurRadius: 20 + (glowIntensity * 20),
                   offset: Offset(0, 8 + (glowIntensity * 8)),
                 ),
                 BoxShadow(
-                  color: AppTheme.neonGreen.withOpacity(shadowOpacity * 0.5),
+                  color: context.theme.neonGreen.withValues(
+                    alpha: shadowOpacity * 0.5,
+                  ),
                   blurRadius: 40 + (glowIntensity * 40),
                   offset: Offset(0, 16 + (glowIntensity * 16)),
                 ),
