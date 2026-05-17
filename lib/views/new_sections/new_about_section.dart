@@ -137,6 +137,7 @@ class NewAboutSection extends StatelessWidget {
               'assets/images/decorative_1.png',
               fit: BoxFit.cover,
               width: double.infinity,
+              cacheWidth: 800,
               errorBuilder: (_, __, ___) => Container(
                 height: 200,
                 color: AppTheme.surfaceContainerLow,

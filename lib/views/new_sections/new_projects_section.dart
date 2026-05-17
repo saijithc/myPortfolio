@@ -94,6 +94,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                   height: isMobile ? 160 : 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
+                  cacheWidth: 800,
                   errorBuilder: (_, __, ___) => Container(
                     height: isMobile ? 160 : 200,
                     color: AppTheme.surfaceContainer,

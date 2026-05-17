@@ -23,28 +23,35 @@ class NewPortfolioHomePage extends StatefulWidget {
 class _NewPortfolioHomePageState extends State<NewPortfolioHomePage> {
   final ScrollController _scrollController = ScrollController();
   int _activeSection = 0;
+  int _lastScrollCheck = 0;
 
-  final _sectionKeys = List.generate(10, (_) => GlobalKey());
+  static const int _sectionCount = 10;
+  final _sectionKeys = List.generate(_sectionCount, (_) => GlobalKey());
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
+    _scrollController.addListener(_onScrollThrottled);
+  }
+
+  void _onScrollThrottled() {
+    final now = DateTime.now().millisecondsSinceEpoch;
+    if (now - _lastScrollCheck < 100) return;
+    _lastScrollCheck = now;
+    _onScroll();
   }
 
   void _onScroll() {
     if (!_scrollController.hasClients) return;
-    for (int i = 0; i < _sectionKeys.length; i++) {
-      final context = _sectionKeys[i].currentContext;
-      if (context != null) {
-        final renderBox = context.findRenderObject() as RenderBox?;
-        if (renderBox != null) {
-          final position = renderBox.localToGlobal(Offset.zero).dy;
-          if (position < 300 && position > -200) {
-            if (_activeSection != i) setState(() => _activeSection = i);
-            break;
-          }
-        }
+    for (int i = 0; i < _sectionCount; i++) {
+      final ctx = _sectionKeys[i].currentContext;
+      if (ctx == null) continue;
+      final renderBox = ctx.findRenderObject() as RenderBox?;
+      if (renderBox == null) continue;
+      final position = renderBox.localToGlobal(Offset.zero).dy;
+      if (position < 300 && position > -200) {
+        if (_activeSection != i) setState(() => _activeSection = i);
+        break;
       }
     }
   }
@@ -54,7 +61,7 @@ class _NewPortfolioHomePageState extends State<NewPortfolioHomePage> {
   void _scrollToSection(int index) {
     if (index < 0 || index >= _navToSection.length) return;
     final section = _navToSection[index];
-    if (section >= _sectionKeys.length) return;
+    if (section >= _sectionCount) return;
     final context = _sectionKeys[section].currentContext;
     if (context == null) return;
     Scrollable.ensureVisible(
@@ -79,14 +86,18 @@ class _NewPortfolioHomePageState extends State<NewPortfolioHomePage> {
       body: MouseGlow(
         child: Stack(
         children: [
-          CustomPaint(
-            size: size,
-            painter: _DotGridPainter(),
-          ),
-          IgnorePointer(
+          RepaintBoundary(
             child: CustomPaint(
               size: size,
-              painter: _ScanlinePainter(),
+              painter: _DotGridPainter(),
+            ),
+          ),
+          RepaintBoundary(
+            child: IgnorePointer(
+              child: CustomPaint(
+                size: size,
+                painter: _ScanlinePainter(),
+              ),
             ),
           ),
           IgnorePointer(
@@ -103,6 +114,8 @@ class _NewPortfolioHomePageState extends State<NewPortfolioHomePage> {
                   width: size.width,
                   height: size.height,
                   fit: BoxFit.cover,
+                  cacheWidth: 512,
+                  cacheHeight: 512,
                   errorBuilder: (_, __, ___) => const SizedBox(),
                 ),
               ),
@@ -152,21 +165,23 @@ class _NewPortfolioHomePageState extends State<NewPortfolioHomePage> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  key: _sectionKeys[0],
-                  child: NewHeaderSection(
-                    onConnectTap: () => _scrollToSection(6),
+                RepaintBoundary(
+                  child: SizedBox(
+                    key: _sectionKeys[0],
+                    child: NewHeaderSection(
+                      onConnectTap: () => _scrollToSection(6),
+                    ),
                   ),
                 ),
-                SizedBox(key: _sectionKeys[1], child: const NewAboutSection()),
-                SizedBox(key: _sectionKeys[2], child: const NewAchievementsSection()),
-                SizedBox(key: _sectionKeys[3], child: const NewSkillsSection()),
-                SizedBox(key: _sectionKeys[4], child: const NewServicesSection()),
-                SizedBox(key: _sectionKeys[5], child: const NewExperienceSection()),
-                SizedBox(key: _sectionKeys[6], child: const NewProjectsSection()),
-                SizedBox(key: _sectionKeys[7], child: const NewHobbiesSection()),
-                SizedBox(key: _sectionKeys[8], child: const NewContactSection()),
-                SizedBox(key: _sectionKeys[9], child: const NewFooterSection()),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[1], child: const NewAboutSection())),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[2], child: const NewAchievementsSection())),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[3], child: const NewSkillsSection())),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[4], child: const NewServicesSection())),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[5], child: const NewExperienceSection())),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[6], child: const NewProjectsSection())),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[7], child: const NewHobbiesSection())),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[8], child: const NewContactSection())),
+                RepaintBoundary(child: SizedBox(key: _sectionKeys[9], child: const NewFooterSection())),
                 const SizedBox(height: 80),
               ],
             ),

@@ -32,7 +32,7 @@ class _MouseGlowState extends State<MouseGlow> {
       },
       child: Stack(
         children: [
-          widget.child,
+          RepaintBoundary(child: widget.child),
           if (_isVisible)
             Positioned.fill(
               child: IgnorePointer(
